@@ -1,0 +1,228 @@
+/* styles.css */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: palevioletred;
+  }
+
+header {
+  padding: 0.5rem 0;
+  text-align: center;
+}  
+/* Home page style */
+  /* nav and search style */
+  .flex-container{
+    justify-content: center;
+    align-items: center;
+  }
+
+  .top-bar{
+    display: flex;
+    justify-content: right;
+    padding:1rem 3rem;
+  }
+
+  /* search sytle */
+  .search-box {
+    display: flex;
+    align-items: center;
+  }
+
+  .search-input{
+    width: 0;
+    padding: 0;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+  }
+
+  .search-input:focus{
+    width: 200px;
+    padding: 10px;
+  }
+
+  .search-button{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .icon{
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    display: inline-block;
+  }
+
+  .search-i{
+    background-image: url(pics/search.svg);
+  }
+
+  .user-i{
+    background-image: url(pics/user.svg);
+    margin-left: 1rem;
+  }
+
+  .basket-i{
+    background-image: url(pics/cart.svg);
+    margin-left: 1rem;
+  }
+
+/* navigation sytle */
+nav{
+  color:azure;
+  display: block;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav ul li {
+  flex: 1;
+  padding: 0 1rem;
+}
+
+nav a{
+  display: block;
+  border: 5px solid black;
+  text-decoration: none;
+  color: white;
+  padding: 1rem;
+}
+nav a:hover{
+  text-decoration: underline;
+}
+
+/* main style */
+.main-pic{
+  background-image: url(pics/mainHome.jpeg);
+  background-size: cover;
+  opacity: 80%;
+  height: 20rem;
+  margin: 2rem 3rem 2rem 3rem;
+}
+/*main slideshow */
+.featured-products{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: blueviolet;
+  position: relative;
+}
+
+.slideshow-container{
+  position: relative;
+  max-width: 320px;
+}
+.slideshow{
+  overflow: hidden;
+  width: 320px;
+  height: 300px;
+}
+.slide-track{
+  display: flex;
+  transition:transform 0.5s ease-in-out;
+}
+.featured-item{
+  flex: 0 0 auto;
+  width: 320px;
+  height: 300px;  
+  background-size: contain;
+  background-position: center;
+}
+
+/*slideshow buttons*/
+.slide-prev, .slide-next{
+  position: absolute;
+  top: 50%;
+  padding: 15px 10px;
+  cursor: pointer;
+  background: #333;
+  color: white; 
+  border: 5px solid black;
+  z-index: 1;
+}
+
+.slide-prev{
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+.slide-next{
+  right: 0;
+  transform: translate(-50%, -50%);
+}
+
+/* Form page style 
+  form {
+    
+    width: 80%; /* Set the width of the form 
+    max-width: 600px; /* Set a maximum width 
+    margin: 20px auto; /* Center the form horizontally 
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    padding: 8px;
+    cursor: pointer;
+  }
+  /* Apply basic styles to the form */
+
+
+/* Apply styles to form elements 
+form input[type="text"],
+form input[type="email"],
+form textarea {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form textarea {
+  height: 100px; /* Adjust the height of the textarea 
+}
+
+form input[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Apply styles to form on smaller screens 
+@media screen and (max-width: 768px) {
+  form {
+    width: 90%; /* Reduce width for smaller screens 
+  }
+}
+/* Form style finish here*/
