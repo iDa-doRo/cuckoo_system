@@ -1,9 +1,150 @@
-/* styles.css */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body{
+  width: 100%;
+  height: 100%;
+}
+
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-color: palevioletred;
   }
-  
+.visually-hidden{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+/* Dashboard page style */
+  /* nav and search style */
+  .dashboard{
+    width: 100%;
+    max-width: 1200px;
+    height: 100vh;
+    border: 2px solid goldenrod;
+    background-color: turquoise;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .flex-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: plum;
+    flex: 0 0 auto;
+  }
+.logo{
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+
+}
+  .top-bar{
+    display: flex;
+    justify-content: center;
+    padding:1rem 3rem;
+  }
+
+  /* search sytle */
+  .search-box {
+    display: flex;
+    align-items: center;
+  }
+
+  .search-input{
+    padding: 0;
+    border: none;
+    border-radius: 5px;
+    width: 0;
+   outline: none;
+  }
+
+  .search-input:focus{
+    width: 200px;
+    padding: 10px;
+  }
+
+  .search-button{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .icon{
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+  }
+
+  .search-i{
+    background-image: url(pics/search.svg);
+  }
+
+  .user-i{
+    background-image: url(pics/user.svg);
+    margin-left: 1rem;
+  }
+
+  .logout-i{
+    background-image: url(pics/logout.svg);
+    margin-left: 1rem;
+  }
+.container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px;
+  flex: 1 1  auto;
+  overflow-y: auto;
+}
+  .dash-item{
+    position: relative;
+  }
+
+  .dash-button{
+    width: 100%;
+    height: 15vh;
+    background-color: blanchedalmond;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+  .pin{
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: salmon;
+    color: black;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+/* requests styles 
   #app {
     max-width: 600px;
     margin: 0 auto;
@@ -29,18 +170,18 @@ body {
     cursor: pointer;
   }
 
-  /* Apply basic styles to the form */
+Apply basic styles to the form 
 form {
-  width: 80%; /* Set the width of the form */
-  max-width: 600px; /* Set a maximum width */
-  margin: 20px auto; /* Center the form horizontally */
+  width: 80%; /* Set the width of the form 
+  max-width: 600px; /* Set a maximum width 
+  margin: 20px auto; /* Center the form horizontally 
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Apply styles to form elements */
+/* Apply styles to form elements 
 form input[type="text"],
 form input[type="email"],
 form textarea {
@@ -52,7 +193,7 @@ form textarea {
 }
 
 form textarea {
-  height: 100px; /* Adjust the height of the textarea */
+  height: 100px; /* Adjust the height of the textarea 
 }
 
 form input[type="submit"] {
@@ -64,9 +205,9 @@ form input[type="submit"] {
   cursor: pointer;
 }
 
-/* Apply styles to form on smaller screens */
+/* Apply styles to form on smaller screens 
 @media screen and (max-width: 768px) {
   form {
-    width: 90%; /* Reduce width for smaller screens */
+    width: 90%; /* Reduce width for smaller screens 
   }
-}
+}*/

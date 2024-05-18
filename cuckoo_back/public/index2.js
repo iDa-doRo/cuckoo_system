@@ -1,4 +1,37 @@
-// Define the displayData function
+//Search nav bar //
+document.addEventListener('DOMContentLoaded', function(){
+  var searchInput = document.querySelector('.search-input');
+  var searchButton = document.querySelector('.search-button');
+
+  searchButton.addEventListener('click', function (event){
+    if(document.activeElement !== searchInput) {
+      event.preventDefault();
+      searchInput.focus();
+    }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () =>{
+  const fetchData = () => {
+    return {
+      reservations: 7, 
+      requests: 12
+    };
+  };
+const updatePins =()=>{
+  const data = fetchData();
+  document.getElementById('reservation-pin').innerText = data.reservations;
+  document.getElementById('requests-pin').innerText = data.requests;
+};
+
+updatePins();
+
+setInterval(updatePins, 500000); //update pins every 5 min
+
+
+});
+
+/*// Define the displayData function
 function displayData(data) {
     // Display the posted data on the UI of the second web app
     const dataListElement = document.getElementById('dataList');
@@ -44,4 +77,4 @@ function displayData(data) {
     })
     .catch(error => {
       console.error('There was a problem with your fetch operation:', error);
-    });
+    });*/
