@@ -51,66 +51,34 @@ function displayProducts(products) {
   catalogContainer.innerHTML = '';
   products.forEach(product => {
     const productElement = document.createElement('div');
-    productElement.className = 'product';
-    productElement.setAttribute('role', 'article');
-    productElement.setAttribute('aria-label', `Item ${product.id}`);
-    const productTile = document.createElement('h2');
-    productTile.textContent = product.cuckooName;
-    productElement.appendChild(productTile);
-    const productPrice = document.createElement('div');
-    productPrice.textContent = `€${parseFloat(product.cuckooPrice).toFixed(2)}`;
-    productElement.appendChild(productPrice);
-    const productStatus = document.createElement('div');
-    productStatus.textContent = product.cuckooStatus;
-    productElement.appendChild(productStatus);
-    const productDescription = document.createElement('p');
-    productDescription.textContent = product.cuckooDesc;
-    productElement.appendChild(productDescription);
-
+    productElement.className = 'product';   
     if(product.cuckooPic) {
       const productImage = document.createElement('img');
       productImage.src = product.cuckooPic;
       productImage.alt = product.cuckooName;
       productElement.appendChild(productImage);
     }
+    productElement.setAttribute('role', 'article');
+    productElement.setAttribute('aria-label', `Item ${product.cuckooName}`);
+    const productTile = document.createElement('h3');
+    productTile.textContent = product.cuckooName;
+    productElement.appendChild(productTile);
+    const productDescription = document.createElement('p');
+    productDescription.textContent = product.cuckooDesc;
+    productElement.appendChild(productDescription);const productPrice = document.createElement('div');
+    productPrice.textContent = `€${parseFloat(product.cuckooPrice).toFixed(2)}`;
+    productElement.appendChild(productPrice);
+    const productStatus = document.createElement('div');
+    productStatus.textContent = product.cuckooStatus;
+    productElement.appendChild(productStatus);
+
     catalogContainer.appendChild(productElement);
   });
 }
-/*document.addEventListener('DOMContentLoaded', function(){
-  const catalogItemsContainer = document.querySelector('.catalog-items');
 
-  fetch('http://localhost:3000/catalog/all')
-  .then(response => response.json())
-  .then(data => {
-    data.forEach(item => {
-      const itemElement = document.createElement('div');
-      itemElement.className = 'item';
-      itemElement.setAttribute('role', 'article');
-      itemElement.setAttribute('aria-label', `Item ${item.id}`);
-      const itemImage = document.createElement('img');
-      itemImage.src = `/images/${item.image}`;
-      itemImage.alt = `Image of ${item.title}`;
-      const itemTitle = document.createElement('h3');
-      itemTitle.textContent = item.title;
-      const itemDescription = document.createElement('p');
-      itemDescription.textContent = item.description;
-      const itemPrice = document.createElement('p');
-      itemPrice.textContent = `Price: €${item.price}`;
-      const itemStatus = document.createElement('p');
-      itemStatus.textContent = `Status: ${item.status}`;
 
-      itemElement.appendChild(itemImage);
-      itemElement.appendChild(itemTitle);
-      itemElement.appendChild(itemDescription);
-      itemElement.appendChild(itemPrice);
-      itemElement.appendChild(itemStatus);
-      catalogItemsContainer.appendChild(itemElement);
-    });
-  })
-  .catch(error => console.error('Error fetching catalog items: ', error));
-});
   
-  //Form logic //
+  /*//Form logic //
   document.getElementById('dataForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent default form submission
   

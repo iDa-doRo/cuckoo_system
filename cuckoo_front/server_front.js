@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 const catalogRoutes = require('./routes/catalog');
+const serviceRoutes = require('./routes/service')
 
 const app = express();
 const port = 3000;
@@ -13,6 +14,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Catalog routes
 app.use('/catalog', catalogRoutes);
+app.use('/service', serviceRoutes);
 
 // Serve HTML files
 app.get('/', (req, res) => {
@@ -23,7 +25,7 @@ app.get('/catalog', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'catalog.html'));
 });
 
-app.get('/services', (req, res) => {
+app.get('/service', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'service.html'));
 });
 

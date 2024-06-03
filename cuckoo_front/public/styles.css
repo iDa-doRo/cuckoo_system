@@ -179,6 +179,57 @@ nav a:hover{
   transform: translate(-50%, -50%);
 }
 
+/* catalog style */
+.breadcrumb {
+  margin: 0 2rem;
+  background-color: burlywood;
+  border: none;
+}
+.breadcrumb a {
+  text-decoration: none;
+  border: none;
+  display: inline-block;
+}
+.content {
+  display: flex;
+  padding: 20px;
+}
+
+aside {
+  width: 200px;
+  padding-right: 20px;
+  background-color: aquamarine;
+  margin: 0 2rem;
+}
+
+aside h2, aside h3 {
+  margin-top: 0;
+}
+
+aside ul {
+  list-style: none;
+  padding: 0;
+}
+ aside ul li {
+  margin-bottom: 10px;
+ }
+
+ .catalog-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+ }
+
+ .catalog-items .product {
+  width: 300px;
+  text-align: center;
+ }
+
+ .catalog-items .product img {
+  width:100%;
+  height: auto;
+ }
+
 /* Form page style 
   form {
     
