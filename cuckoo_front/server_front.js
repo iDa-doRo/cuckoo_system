@@ -4,6 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const catalogRoutes = require('./routes/catalog');
 const serviceRoutes = require('./routes/service')
+const statusRoutes = require('./routes/status')
 
 const app = express();
 const port = 3000;
@@ -14,6 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Catalog routes
 app.use('/catalog', catalogRoutes);
+app.use('/status', statusRoutes);
 app.use('/service', serviceRoutes);
 
 // Serve HTML files

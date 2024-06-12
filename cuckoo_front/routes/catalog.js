@@ -36,6 +36,21 @@ router.get('/:id', (req, res) => {
     res.json(result);
   });
 });
-
+//get cuckoo status to use in filtering options
+router.get('/', (req, res) => {
+  const {status} = req.query;
+  let query = 'SELECT cuckooName, cuckooPrice, cuckooDesc, cuckooPic, cuckooStatus AS status FROM cuckoo';
+  if (status) {
+    query += ' WHERE cuckooStatus = ?';
+  }
+  db.query(query, [status], (err, results) => {
+    if (err) {
+      console.error('Error fetching items status', err);
+      res.status(500).send('Server error');
+      return;
+    }
+    res.json(results);
+  });
+});
 module.exports = router;
 

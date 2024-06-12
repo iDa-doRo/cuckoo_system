@@ -35,48 +35,122 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // catalog logic//
-document.addEventListener('DOMContentLoaded', () => {
-  fetchProducts();
-});
-function fetchProducts() {
-  fetch('http://localhost:3000/catalog/all')
-  .then(response => response.json())
-  .then(products => {
-    displayProducts(products);
-  })
-  .catch(error => console.error('Error fetching products:', error));
-}
-function displayProducts(products) {
-  const catalogContainer = document.getElementById('catalog-items');
-  catalogContainer.innerHTML = '';
-  products.forEach(product => {
-    const productElement = document.createElement('div');
-    productElement.className = 'product';   
-    if(product.cuckooPic) {
-      const productImage = document.createElement('img');
-      productImage.src = product.cuckooPic;
-      productImage.alt = product.cuckooName;
-      productElement.appendChild(productImage);
+// document.addEventListener('DOMContentLoaded', () => {
+//   fetchProducts();
+// });
+// function fetchProducts() {
+//   fetch('http://localhost:3000/catalog/all')
+//   .then(response => response.json())
+//   .then(products => {
+//     displayProducts(products);
+//   })
+//   .catch(error => console.error('Error fetching products:', error));
+// }
+// function displayProducts(products) {
+//   const catalogContainer = document.getElementById('catalog-items');
+//   catalogContainer.innerHTML = '';
+//   products.forEach(product => {
+//     const productElement = document.createElement('div');
+//     productElement.className = 'product';   
+//     if(product.cuckooPic) {
+//       const productImage = document.createElement('img');
+//       productImage.src = product.cuckooPic;
+//       productImage.alt = product.cuckooName;
+//       productElement.appendChild(productImage);
+//     }
+//     productElement.setAttribute('role', 'article');
+//     productElement.setAttribute('aria-label', `Item ${product.cuckooName}`);
+//     const productTile = document.createElement('h3');
+//     productTile.textContent = product.cuckooName;
+//     productElement.appendChild(productTile);
+//     const productDescription = document.createElement('p');
+//     productDescription.textContent = product.cuckooDesc;
+//     productElement.appendChild(productDescription);const productPrice = document.createElement('div');
+//     productPrice.textContent = `€${parseFloat(product.cuckooPrice).toFixed(2)}`;
+//     productElement.appendChild(productPrice);
+//     const productStatus = document.createElement('div');
+//     productStatus.textContent = product.cuckooStatus;
+//     productElement.appendChild(productStatus);
+
+//     catalogContainer.appendChild(productElement);
+//   });
+// }
+
+// filter options logic
+document.addEventListener('DOMContentLoaded', function(){
+  const catalogItemsContainer = document.querySelector('.catalog-items');
+  const statusFilterContainer = document.getElementById('status-filter');
+function fetchCatalogItems(status) {
+    let url = 'http://localhost:3000/catalog';
+    if (status) {
+      url += `?status=${encodeURIComponent(status)}`;
     }
-    productElement.setAttribute('role', 'article');
-    productElement.setAttribute('aria-label', `Item ${product.cuckooName}`);
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      catalogItemsContainer.innerHTML = '';
+      data.forEach(item => {
+      const productElement = document.createElement('div');
+     productElement.className = 'product';   
+     if(item.cuckooPic) {
+       const productImage = document.createElement('img');
+       productImage.src = item.cuckooPic;
+       productImage.alt = item.cuckooName;
+       productElement.appendChild(productImage);
+     }
+     productElement.setAttribute('role', 'article');
+     productElement.setAttribute('aria-label', `Item ${item.cuckooName}`);
     const productTile = document.createElement('h3');
-    productTile.textContent = product.cuckooName;
-    productElement.appendChild(productTile);
-    const productDescription = document.createElement('p');
-    productDescription.textContent = product.cuckooDesc;
-    productElement.appendChild(productDescription);const productPrice = document.createElement('div');
-    productPrice.textContent = `€${parseFloat(product.cuckooPrice).toFixed(2)}`;
-    productElement.appendChild(productPrice);
-    const productStatus = document.createElement('div');
-    productStatus.textContent = product.cuckooStatus;
-    productElement.appendChild(productStatus);
+     productTile.textContent = item.cuckooName;
+     productElement.appendChild(productTile);
+     const productDescription = document.createElement('p');
+     productDescription.textContent = item.cuckooDesc;
+     productElement.appendChild(productDescription);const productPrice = document.createElement('div');
+     productPrice.textContent = `€${parseFloat(item.cuckooPrice).toFixed(2)}`;
+     productElement.appendChild(productPrice);
+     const productStatus = document.createElement('div');
+     productStatus.textContent = item.cuckooStatus;
+     productElement.appendChild(productStatus);
 
-    catalogContainer.appendChild(productElement);
-  });
-}
+     catalogItemsContainer.appendChild(productElement);
+      });
+    })
+    .catch(error => console.error('Error fetching catalog items', error));
+  }  
+  fetch('http://localhost:3000/status')
+  .then(response => response.json())
+  .then(status => {
+    const allList = document.createElement('li');
+    const allA = document.createElement('a');
+    allA.href = '#';
+    allA.textContent = 'Show All';
+    allA.setAttribute('aria-label', 'show all');
+    allA.addEventListener('click', (e) => {
+      e.preventDefault();
+      fetchCatalogItems();
+    });
+    allList.appendChild(allA);
+    statusFilterContainer.appendChild(allList);
+    //status options
+    status.forEach(status => {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#';
+      a.textContent = status.cuckooStatus;
+      a.setAttribute('aria-label', status.cuckooStatus);
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        fetchCatalogItems(status.cuckooStatus);
+      });
+      li.appendChild(a);
+      statusFilterContainer.appendChild(li);
+    });
+  })
+  .catch(error => console.error('Error fetching cuckoo status', error));
+  
 
-
+fetchCatalogItems();
+});
   
   /*//Form logic //
   document.getElementById('dataForm').addEventListener('submit', function(event) {
