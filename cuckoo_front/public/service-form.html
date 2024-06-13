@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Mr Cucut</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Security-Policy"
+            content="script-src 'self' http://localhost:3000 https://code.jquery.com;">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+        <header class="flex-container" role="banner">
+            <div class="top-bar flex-container">
+                <form action="/search" method="get" class="search-box" role="search">
+                    <label for="search-box" class="visually-hidden">Search the site content</label>
+                    <input type="search" id="search-box" class="search-input" placeholder="search..." tabindex="0"
+                        aria-label="search the site content">
+                    <button type="submit" class="search-button" tabindex="0" aria-label="Submit search"><span
+                            class="icon search-i"></span></button>
+                </form>
+                <button class="icon user-i" tabindex="0" aria-label="User account"></button>
+                <button class="icon basket-i" tabindex="0" aria-label="Your shopping basket"></button>
+            </div>
+            <nav role="navigation">
+                <ul>
+                    <li><a href="catalog.html" tabindex="0">Catalogue</a></li>
+                    <li><a href="locations.html" tabindex="0">Locations</a></li>
+                    <li><a href="service.html" tabindex="0">Services</a></li>
+                    <li><a href="about.html" tabindex="0">About Us</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main role="main">
+            <nav class="breadcrumb" aria-label="breadcrumb">
+                <a href="home.html">Home Page</a> &gt; <a href="service.html">Service &gt; <a
+                        href="service-form.html"></a>Service Form</a>
+            </nav>
+            <section aria-labelledby="service-form">
+                <h2 id="service-form">Service Form</h2>
+                <form id="serviceRequst" aria-label="Service Request Form" enctype="multipart/form-data">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" required>
+                    <label for="surname">Surname</label>
+                    <input type="text" name="surname" id="surname" required>
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" cols="30" rows="10" required></textarea>
+                    <label for="attachments">Attachments</label>
+                    <input type="file" name="attachments" id="attachments" multiple>
+                    <button type="submit">Submit form</button>
+                    <button type="button" onclick="location.href = 'services.html'">Cancel</button>
+                </form>
+            </section>
+        </main>
+        <div id="successMessage" role="alert" aria-live="assertive" hidden>Successfully received your service request.
+            Request ID: <span id="requestID"></span> <button onclick="closeSuccessMessage()">Close</button></div>
+        <footer role="contentinfo"></footer>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="index.js"></script>
+    </body>
+
+</html>

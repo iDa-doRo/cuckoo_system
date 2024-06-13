@@ -3,20 +3,29 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 const catalogRoutes = require('./routes/catalog');
-const serviceRoutes = require('./routes/service')
-const statusRoutes = require('./routes/status')
+const statusRoutes = require('./routes/status');
+const  {db, createUser} = require('./routes/users');
+const requestRoutes = require('./routes/request');
+
+console.log('Request routes:', requestRoutes);
 
 const app = express();
 const port = 3000;
 
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// Catalog routes
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+//routes
 app.use('/catalog', catalogRoutes);
 app.use('/status', statusRoutes);
-app.use('/service', serviceRoutes);
+app.use('/request', requestRoutes);
 
 // Serve HTML files
 app.get('/', (req, res) => {
@@ -27,9 +36,10 @@ app.get('/catalog', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'catalog.html'));
 });
 
-app.get('/service', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'service.html'));
+app.get('/request', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'service-form.html'));
 });
+
 
 app.listen(port, () => {
   console.log(`Public app listening at http://localhost:${port}`);

@@ -34,49 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// catalog logic//
-// document.addEventListener('DOMContentLoaded', () => {
-//   fetchProducts();
-// });
-// function fetchProducts() {
-//   fetch('http://localhost:3000/catalog/all')
-//   .then(response => response.json())
-//   .then(products => {
-//     displayProducts(products);
-//   })
-//   .catch(error => console.error('Error fetching products:', error));
-// }
-// function displayProducts(products) {
-//   const catalogContainer = document.getElementById('catalog-items');
-//   catalogContainer.innerHTML = '';
-//   products.forEach(product => {
-//     const productElement = document.createElement('div');
-//     productElement.className = 'product';   
-//     if(product.cuckooPic) {
-//       const productImage = document.createElement('img');
-//       productImage.src = product.cuckooPic;
-//       productImage.alt = product.cuckooName;
-//       productElement.appendChild(productImage);
-//     }
-//     productElement.setAttribute('role', 'article');
-//     productElement.setAttribute('aria-label', `Item ${product.cuckooName}`);
-//     const productTile = document.createElement('h3');
-//     productTile.textContent = product.cuckooName;
-//     productElement.appendChild(productTile);
-//     const productDescription = document.createElement('p');
-//     productDescription.textContent = product.cuckooDesc;
-//     productElement.appendChild(productDescription);const productPrice = document.createElement('div');
-//     productPrice.textContent = `€${parseFloat(product.cuckooPrice).toFixed(2)}`;
-//     productElement.appendChild(productPrice);
-//     const productStatus = document.createElement('div');
-//     productStatus.textContent = product.cuckooStatus;
-//     productElement.appendChild(productStatus);
-
-//     catalogContainer.appendChild(productElement);
-//   });
-// }
-
-// filter options logic
+//catalog logic
 document.addEventListener('DOMContentLoaded', function(){
   const catalogItemsContainer = document.querySelector('.catalog-items');
   const statusFilterContainer = document.getElementById('status-filter');
@@ -117,6 +75,7 @@ function fetchCatalogItems(status) {
     })
     .catch(error => console.error('Error fetching catalog items', error));
   }  
+  // filtering logic
   fetch('http://localhost:3000/status')
   .then(response => response.json())
   .then(status => {
@@ -151,9 +110,38 @@ function fetchCatalogItems(status) {
 
 fetchCatalogItems();
 });
+// service logic to access service form
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('reqServiceButton').addEventListener('click', function(){
+    window.location.href = 'service-form.html'
+  });
+});
   
-  /*//Form logic //
-  document.getElementById('dataForm').addEventListener('submit', function(event) {
+  //Form logic
+document.getElementById('serviceRequest').addEventListener('submit', function(event){
+  event.preventDefault();
+
+  const formData = new FormData(event.target);
+
+  fetch('/request/submit-request', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(result => {
+    if (result.success){
+      document.getElementById('requestID').textContent = result.requestID;
+      document.getElementById('successMessage').hidden = false;
+    }
+  })
+  .catch(error => console.error('Error:', error));
+});
+function closeSuccess(){
+  document.getElementById('successMessage').hidden = true;
+}
+
+
+  /* document.getElementById('dataForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent default form submission
   
     // Collect form data
