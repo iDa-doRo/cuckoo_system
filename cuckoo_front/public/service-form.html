@@ -53,12 +53,12 @@
                     <label for="attachments">Attachments</label>
                     <input type="file" name="attachments" id="attachments" multiple>
                     <button type="submit">Submit form</button>
-                    <button type="button" onclick="location.href = 'services.html'">Cancel</button>
+                    <button type="button" id="cancelButton">Cancel</button>
                 </form>
             </section>
         </main>
         <div id="successMessage" role="alert" aria-live="assertive" hidden>Successfully received your service request.
-            Request ID: <span id="requestID"></span> <button onclick="closeSuccessMessage()">Close</button></div>
+            Request ID: <span id="requestID"></span> <button id="closeButton">Close</button></div>
         <footer role="contentinfo"></footer>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="index.js"></script>

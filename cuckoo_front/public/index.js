@@ -136,57 +136,13 @@ document.getElementById('serviceRequest').addEventListener('submit', function(ev
   })
   .catch(error => console.error('Error:', error));
 });
-function closeSuccess(){
+
+// cancel form button
+document.getElementById('cancelButton').addEventListener('click', function(){
+  window.location.href = 'service.html';
+});
+
+//close button 
+document.getElementById('closeButton').addEventListener('click', function(){
   document.getElementById('successMessage').hidden = true;
-}
-
-
-  /* document.getElementById('dataForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent default form submission
-  
-    // Collect form data
-    const formData = {
-      Name: document.getElementById('name').value,
-      Email: document.getElementById('email').value,
-      Comment: document.getElementById('comment').value
-    };
-  
-    // Send form data to server using AJAX
-    fetch('/submit-form', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('app 1 Server response:', data);
-      // Optionally handle the server response here
-    })
-    .catch(error => {
-      console.error('There was a problem with your fetch operation:', error);
-    });
-  });
-
-
-  // After posting data successfully
-fetch('http://localhost:3000/submitted-data') // New endpoint to retrieve posted data
-.then(response => {
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-  return response.json();
-})
-.then(data => {
-  console.log('app 1 Posted data:', data);
-  // Optionally handle the posted data here
-})
-.catch(error => {
-  console.error('There was a problem with your fetch operation:', error);
-});*/
+});
