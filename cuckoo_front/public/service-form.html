@@ -34,26 +34,41 @@
         </header>
         <main role="main">
             <nav class="breadcrumb" aria-label="breadcrumb">
-                <a href="home.html">Home Page</a> &gt; <a href="service.html">Service &gt; <a
-                        href="service-form.html"></a>Service Form</a>
+                <a href="home.html">Home Page</a> &gt; <a href="service.html">Service</a> &gt; <a
+                    href="service-form.html">Service Form</a>
             </nav>
-            <section aria-labelledby="service-form">
-                <h2 id="service-form">Service Form</h2>
-                <form id="serviceRequest" aria-label="Service Request Form" enctype="multipart/form-data">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" id="name" required>
-                    <label for="surname">Surname</label>
-                    <input type="text" name="surname" id="surname" required>
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                    <label for="subject">Subject</label>
-                    <input type="text" id="subject" name="subject" required>
-                    <label for="message">Message</label>
-                    <textarea name="message" id="message" cols="30" rows="10" required></textarea>
-                    <label for="attachments">Attachments</label>
-                    <input type="file" name="attachments" id="attachments" multiple>
-                    <button type="submit">Submit form</button>
-                    <button type="button" id="cancelButton">Cancel</button>
+            <section class="service-form-section" aria-labelledby="service-form">
+                <h2 id="service-form" class="visually-hidden">Service Form</h2>
+                <form class="service-request" id="serviceRequest" aria-label="Service Request Form"
+                    enctype="multipart/form-data">
+                    <div class="form-full-name">
+                        <div class="form-flex">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name" required>
+                        </div>
+                        <div class="form-flex">
+                            <label for="surname">Surname</label>
+                            <input type="text" name="surname" id="surname" required>
+                        </div>
+                    </div>
+                    <div class="form-flex">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-flex">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                        <div class="form-flex">
+                            <label for="message">Message</label>
+                            <textarea name="message" id="message" cols="30" rows="10" required></textarea>
+                        </div>
+                        <div class="form-flex">
+                            <label for="attachments">Attachments</label>
+                            <input type="file" name="attachments" id="attachments" multiple>
+                        </div>
+                        <div class="form-action">
+                            <button type="submit">Submit form</button>
+                            <button type="button" id="cancelButton">Cancel</button>
                 </form>
             </section>
         </main>

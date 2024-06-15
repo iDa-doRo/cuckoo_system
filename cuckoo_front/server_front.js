@@ -7,8 +7,6 @@ const statusRoutes = require('./routes/status');
 const  {db, createUser} = require('./routes/users');
 const requestRoutes = require('./routes/request');
 
-console.log('Request routes:', requestRoutes);
-
 const app = express();
 const port = 3000;
 
