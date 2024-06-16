@@ -1,19 +1,25 @@
+// needed dependencies to run app
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const path = require('path');
-const catalogRoutes = require('./routes/catalog');
+const contentRoutes = require('./routes/content');
+const requestRoutes = require('./routes/requests');
 
 const app = express();
 const port = 3001;
 
+app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Catalog routes
-app.use('/catalog', catalogRoutes);
+// Admin routers
+app.use('/content', contentRoutes);
+app.use('/requests', requestRoutes);
 
 // Serve HTML files
-app.get('/dashboard', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
 

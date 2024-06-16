@@ -6,7 +6,7 @@
     <title>Admin Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy"
-      content="script-src 'self' http://localhost:4000 https://code.jquery.com;">
+      content="script-src 'self' http://localhost:3001 https://code.jquery.com;">
 
     <link rel="stylesheet" href="styles.css">
   </head>
@@ -14,7 +14,7 @@
   <body>
     <div class="dashboard">
       <header class="flex-container" role="banner">
-        <div class="logo" aria-label="Dashboard Home">Dashboard</div>
+        <div class="logo" id="admin-logo" aria-label="Dashboard Home">Dashboard</div>
         <div class="top-bar flex-container">
           <form action="/search" method="get" class="search-box" role="search">
             <label for="search-box" class="visually-hidden">Search the site content</label>
@@ -34,9 +34,9 @@
             <button class="dash-button" id="cuckoo-clocks" aria-labelledby="cuckoo-clocks">Cuckoo Clocks</button>
           </div>
         </section>
-        <section aria-labelledby="requests">
+        <section aria-labelledby="requests-dashboard">
           <div class="dash-item">
-            <button class="dash-button" id="requests" aria-labelledby="requests">Requests</button>
+            <button class="dash-button" id="requests-dash" aria-labelledby="requests-dashboard">Requests</button>
             <span class="pin" id="requests-pin" aria-label="11 new requests">11</span>
           </div>
         </section>

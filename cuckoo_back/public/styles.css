@@ -144,70 +144,52 @@ body {
     padding: 5px 10px;
     font-size: 14px;
   }
-/* requests styles 
-  #app {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  form {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-  }
-  
-  button {
-    padding: 8px;
-    cursor: pointer;
+/* admin request style */
+  .admin-req-main{
+    padding: 20px;
   }
 
-Apply basic styles to the form 
-form {
-  width: 80%; /* Set the width of the form 
-  max-width: 600px; /* Set a maximum width 
-  margin: 20px auto; /* Center the form horizontally 
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  nav[aria-label='breadcrumb'] ol {
+    list-style: none;
+    display: flex;
+    padding: 0;
+  }
+
+nav[aria-label='breadcrumb'] li +li:before {
+  content: ">";
+  padding: 0 10px;
 }
 
-/* Apply styles to form elements 
-form input[type="text"],
-form input[type="email"],
-form textarea {
-  width: 100%;
+.req-buttons{
+  justify-content: space-around;
+  display: flex;
+  margin: 2rem 0;
+}
+
+.req-buttons button{
   padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-form textarea {
-  height: 100px; /* Adjust the height of the textarea 
-}
-
-form input[type="submit"] {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
   cursor: pointer;
 }
+.req-buttons button span {
+  background-color: rgb(168, 47, 47);
+  color: white;
+  border-radius: 50%;
+  padding: 2px 8px;
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  font-size: 12px;
+}
+.req-table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
-/* Apply styles to form on smaller screens 
-@media screen and (max-width: 768px) {
-  form {
-    width: 90%; /* Reduce width for smaller screens 
-  }
-}*/
+.req-table, th, td {
+  border: 1px solid #1d0730;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+}

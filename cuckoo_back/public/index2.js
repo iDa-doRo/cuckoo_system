@@ -1,8 +1,7 @@
-//Search nav bar //
+//Search nav bar
 document.addEventListener('DOMContentLoaded', function(){
   var searchInput = document.querySelector('.search-input');
   var searchButton = document.querySelector('.search-button');
-
   searchButton.addEventListener('click', function (event){
     if(document.activeElement !== searchInput) {
       event.preventDefault();
@@ -10,71 +9,74 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   });
 });
-
+// logic to go back to dashboard usign the logo
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('admin-logo').addEventListener('click', function(){
+    window.location.href = 'dashboard.html'
+  });
+});
+//dummy data used to see if pins work
 document.addEventListener("DOMContentLoaded", () =>{
   const fetchData = () => {
     return {
       reservations: 7, 
-      requests: 12
+      requestsDash: 12
     };
   };
+// pins to show new requests from dashboard
 const updatePins =()=>{
   const data = fetchData();
   document.getElementById('reservation-pin').innerText = data.reservations;
-  document.getElementById('requests-pin').innerText = data.requests;
+  document.getElementById('requests-pin').innerText = data.requestsDash;
 };
-
 updatePins();
-
 setInterval(updatePins, 500000); //update pins every 5 min
-
-
+});
+// logic to access cuckoo-clocks content page
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('cuckoo-clocks').addEventListener('click', function(){
+    window.location.href = 'content.html'
+  });
+});
+// logic to access admin requests page
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('requests-dash').addEventListener('click', function(){
+    window.location.href = 'adminReq.html'
+  });
 });
 
-/*// Define the displayData function
-function displayData(data) {
-    // Display the posted data on the UI of the second web app
-    const dataListElement = document.getElementById('dataList');
-    
-    // Clear any existing data
-    dataListElement.innerHTML = '';
-  
-  // Loop through each data item and create a division for each item
-  data.forEach(item => {
-    const divItem = document.createElement('div');
-    divItem.classList.add('data-item'); // Optional: Add a class for styling
+// requests table logic
+document.addEventListener('DOMContentLoaded', () => {
+  fetch('/requests')
+  .then(response => response.json())
+  .then(data => createTableReq(data))
+  .catch(error => console.error('error fetching the requests', error));
 
-    // Create separate lines for each property value
-    const nameLine = document.createElement('div');
-    nameLine.textContent = `Name: ${item.name || 'N/A'}`;
-    divItem.appendChild(nameLine);
+  fetch('/requests/count')
+  .then(response => response.json())
+  .then(data => updateReqCount(data))
+  .catch(error => console.error('error fetching the requests count', error));
+});
 
-    const emailLine = document.createElement('div');
-    emailLine.textContent = `Email: ${item.email || 'N/A'}`;
-    divItem.appendChild(emailLine);
-
-    const commentLine = document.createElement('div');
-    commentLine.textContent = `Comment: ${item.comment || 'N/A'}`;
-    divItem.appendChild(commentLine);
-
-    // Append the division to the container element
-    dataListElement.appendChild(divItem);
+// dinamically create table with the database retreived data
+function createTableReq(data){
+  const tableBody = document.getElementById('request-table-body');
+  tableBody.innerHTML = '';
+  data.forEach(request =>{
+    const reqRow = document.createElement('tr');
+    const shortDate = new Date(request.reqDate).toLocaleDateString();//display only date part
+    reqRow.innerHTML = 
+    `<td>${request.id}</td>
+    <td>${request.userName}</td>
+    <td>${request.userEmail}</td>
+    <td>${request.reqSubject}</td>
+    <td>${shortDate}</td>`;
+    tableBody.appendChild(reqRow);
   });
 }
-  
-  // Fetch data asynchronously
-  fetch('http://localhost:3000/submitted-data')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log('app 2 Posted data:', data);
-      // Call the displayData function with the fetched data
-      displayData(data);
-    })
-    .catch(error => {
-      console.error('There was a problem with your fetch operation:', error);
-    });*/
+// request count logic
+function updateReqCount(data){
+  const newReqCount = document.getElementById('req-count');
+  newReqCount.textContent= `(${data.requestCount})`;
+}
+

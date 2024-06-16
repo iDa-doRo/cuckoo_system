@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Admin Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Security-Policy"
+            content="script-src 'self' http://localhost:3001 https://code.jquery.com;">
+
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+        <div class="dashboard">
+            <header class="flex-container" role="banner">
+                <div class="logo" id="admin-logo" aria-label="Dashboard Home">Dashboard</div>
+                <div class="top-bar flex-container">
+                    <form action="/search" method="get" class="search-box" role="search">
+                        <label for="search-box" class="visually-hidden">Search the site content</label>
+                        <input type="search" id="search-box" class="search-input" placeholder="search..." tabindex="0"
+                            aria-label="search the site content">
+                        <button type="submit" class="search-button" tabindex="0" aria-label="Submit search"><span
+                                class="icon search-i"></span></button>
+                    </form>
+                    <button class="icon user-i" tabindex="0" aria-label="User account"></button>
+                    <button class="icon logout-i" tabindex="0" aria-label="Log Out from admin area"></button>
+                </div>
+            </header>
+
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+            <script src="index2.js"></script>
+    </body>
+
+</html>
