@@ -26,7 +26,7 @@ const connection = mysql.createConnection({
     }
     console.log('Connected to MySQL');
   });
-// retreive the data from database and join users and request table based on userID
+// get data from database and join users and request table based on userID
   router.get('/', (req,res) =>{
     const query =`SELECT r.id, r.reqDate, r.reqSubject, u.userName, u.userEmail FROM request r JOIN users u ON r.userID =u.id`;
     connection.query(query, (error, results) =>{
@@ -49,5 +49,15 @@ router.get('/count', (req,res) =>{
     res.json(results[0]);
   });
 });
-
+// get only requests from the last 2 days
+router.get('/new', (req,res) =>{
+  const query = `SELECT r.id, r.reqDate, r.reqSubject, u.userName, u.userEmail FROM request r JOIN users u ON r.userID = u.id WHERE reqDate >= DATE_SUB(NOW(), INTERVAL 2 DAY)`;
+  connection.query(query, (error, results) =>{
+    if(error){
+      res.status(500).json({ error: error.message });
+      return;
+    }
+    res.json(results);
+  });
+});
 module.exports = router;

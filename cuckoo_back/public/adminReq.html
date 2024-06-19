@@ -7,8 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Security-Policy"
             content="script-src 'self' http://localhost:3001 https://code.jquery.com;">
-
         <link rel="stylesheet" href="styles.css">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
     </head>
 
     <body>
@@ -37,10 +37,11 @@
                 <section aria-labelledby="requests-section">
                     <h2 id="requests-section" class="visually-hidden">Requests Management</h2>
                     <div class="req-buttons">
-                        <button id="new-request" aria-label="New Request">New Requests <span
-                                id="req-count">(0)</span></button>
-                        <button id="update-request" aria-label="Updated Request">Updated Requests</button>
-                        <button id="closed-request" aria-label="Closed Request">Closed Requests</button>
+                        <button id="new-request" aria-label="New Requests">New Requests <span
+                                id="req-count">0</span></button>
+                        <button id="update-request" aria-label="Updated Requests">Updated Requests</button>
+                        <button id="all-request" aria-label="All Requests">All Requests</button><button
+                            id="closed-request" aria-label="Closed Requests">Closed Requests</button>
                     </div>
                     <table class="req-table" aria-labelledby="requests-table">
                         <caption id="requests-table">New Requests</caption>
