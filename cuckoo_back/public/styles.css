@@ -194,3 +194,16 @@ th, td {
   text-align: left;
   padding: 10px;
 }
+
+/* request details style */
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+.res-section {
+  margin: 2rem;
+}

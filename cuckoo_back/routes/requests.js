@@ -38,6 +38,7 @@ const connection = mysql.createConnection({
     });
   });
 
+
   // count new requests received in the last 2 days
 router.get('/count', (req,res) =>{
   const query = `SELECT COUNT(*) AS requestCount FROM request WHERE reqDate >= DATE_SUB(NOW(), INTERVAL 2 DAY)`;
@@ -59,5 +60,20 @@ router.get('/new', (req,res) =>{
     }
     res.json(results);
   });
-});
+});  
+
+router.get('/:id', (req,res) =>{
+    const query =`SELECT r.id, r.reqDate, r.reqSubject, r.reqMessage, u.userName, u.userEmail FROM request r JOIN users u ON r.userID = u.id WHERE r.id = ?`;
+    connection.query(query, [req.params.id], (error, results) =>{
+      if(error){
+        res.status(500).json({ error: error.message });
+        return;
+      }
+      if (results.length === 0) {
+        res.status(404).json({error: 'Request not found'});
+        return;
+      }
+      res.json(results[0]);
+    });
+  });
 module.exports = router;

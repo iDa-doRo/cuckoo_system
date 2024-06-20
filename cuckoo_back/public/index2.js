@@ -57,6 +57,29 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('all-request')) {
     document.getElementById('all-request').addEventListener('click', fetchAll);
   }
+  // event listener for request detail
+  if (document.getElementById('req-details-section')) {
+    const urlParam = new URLSearchParams(window.location.search);
+    const requestID = urlParam.get('id');
+    if (requestID){
+      fetch(`/requests/${requestID}`)
+      .then(response => response.json())
+      .then(data => requestDetails(data))
+      .catch(error => console.error('error fetching request details', error));
+    }
+    document.getElementById('now').addEventListener('click', () => {
+      handleNow();
+    });
+    document.getElementById('later').addEventListener('click', () => {
+      handleLater(requestID);
+    });
+    document.getElementById('send').addEventListener('click', () => {
+      sendResponse(requestID);
+    });   
+    document.querySelector('close').addEventListener('click', () =>{
+      document.getElementById('message-warning').style.display = 'none';
+    });
+  }   
 });
 
 // fetch and display requests
@@ -102,7 +125,7 @@ function createTableReq(data){
     const reqRow = document.createElement('tr');
     const shortDate = new Date(request.reqDate).toLocaleDateString();//display date part of timestamp
     reqRow.innerHTML = 
-    `<td>${request.id}</td>
+    `<td><a href="adminReqDetail.html?id=${request.id}" aria-label="Request ID ${request.id}">${request.id}</a></td>
     <td>${request.userName}</td>
     <td>${request.userEmail}</td>
     <td>${request.reqSubject}</td>
@@ -117,6 +140,40 @@ function updateReqCount(data){
   newReqCount.textContent= `${data.requestCount}`;
 }
 
+// Request details logic
+// Function to fill up request details
+function requestDetails(data) {
+  console.log('Request details', data); //debbuging line
+  document.getElementById('req-id').textContent = data.id;
+  document.getElementById('req-id-h').textContent = data.id;
+  document.getElementById('req-user').textContent = data.userName;
+  document.getElementById('req-subject').textContent = data.reqSubject;
+  document.getElementById('req-date').textContent = new Date(data.reqDate).toLocaleDateString();
+  document.getElementById('req-message').textContent = data.reqMessage;
+}
+
+function handleNow(){
+  const responseShow = document.querySelector('.res-section');
+  if (responseShow){
+    responseShow.classList.remove('hidden');
+    responseShow.classList.add('visible');
+  }
+
+
+}
+function handleLater(requestID){
+  showWarning(`Request ID:${requestID} successfully marked to answer later`);
+}
+
+function sendResponse(requestID) {
+  showWarning(`Response to request ID:${requestID} successfully sent to user.`);
+}
+
+function showWarning(message) {
+  const warning = document.getElementById('message-warning');
+  document.getElementById('warning-message').textContent = message;
+  warning.style.display = 'block;'
+}
 // Dashboard logic
 // fetch and display requests count for the admin dashboard
 function fetchDashReqCount() {

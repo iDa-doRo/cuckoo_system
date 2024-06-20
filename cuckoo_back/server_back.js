@@ -30,7 +30,9 @@ app.get('/content', (req, res) => {
 app.get('/requests', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'adminReq.html'));
 });
-
+app.get('/requestDetail', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'adminReqDetail.html'));
+});
 app.listen(port, () => {
   console.log(`Admin app listening at http://localhost:${port}`);
 });

@@ -27,37 +27,45 @@
                     <button class="icon logout-i" tabindex="0" aria-label="Log Out from admin area"></button>
                 </div>
             </header>
-            <main class="admin-req-main" role="main">
+            <main class="detail" role="main">
                 <nav aria-label="breadcrumb">
                     <ol>
                         <li><a href="dashboard.html">Dashboard</a></li>
-                        <li>Requests</li>
+                        <li><a href="adminReq.html"></a> Requests</li>
+                        <li> Request ID: <span id="req-id"></span></li>
                     </ol>
                 </nav>
-                <section aria-labelledby="requests-section">
-                    <h2 id="requests-section" class="visually-hidden">Requests Management</h2>
-                    <div class="req-buttons">
-                        <button id="new-request" aria-label="New Requests">New Requests <span
-                                id="req-count">0</span></button>
-                        <button id="update-request" aria-label="Updated Requests">Updated Requests</button>
-                        <button id="all-request" aria-label="All Requests">All Requests</button><button
-                            id="closed-request" aria-label="Closed Requests">Closed Requests</button>
+                <section aria-labelledby="req-details-section">
+                    <h2 id="req-details-section" class="visually-hidden">Request Details</h2>
+                    <div class="req-details">
+                        <div class="req-h">
+                            <h3>Request ID: <span id="req-id-h"></span></h3>
+                            <p>User: <span id="req-user"></span></p>
+                            <p>Subject: <span id="req-subject"></span></p>
+                            <p>Date Received: <span id="req-date"></span></p>
+                        </div>
+                        <div class="req-b">
+                            <p id="req-message"></p>
+                        </div>
+                        <div class="req-action">
+                            <button id="now" aria-label="answer now">Answer Now</button>
+                            <button id="later" aria-label="answer later">Answer Later</button>
+                        </div>
+                        <div class="res-section hidden">
+                            <label for="response">Subject:</label>
+                            <textarea id="response" cols="50" rows="4"></textarea>
+                            <button id="send" aria-label="send response">Send</button>
+                        </div>
                     </div>
-                    <table class="req-table" aria-labelledby="requests-table">
-                        <caption id="requests-table">New Requests</caption>
-                        <thead>
-                            <tr>
-                                <th>Request ID</th>
-                                <th>User Name</th>
-                                <th>User Email</th>
-                                <th>Subject</th>
-                                <th>Request Date</th>
-                            </tr>
-                        </thead>
-                        <tbody id="request-table-body"></tbody>
-                    </table>
                 </section>
+                <div id="message-warning" class="warning">
+                    <div class="warning-content">
+                        <span class="close">&times;</span>
+                        <p id="warning-message"></p>
+                    </div>
+                </div>
             </main>
+
             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
             <script src="index2.js"></script>
     </body>
