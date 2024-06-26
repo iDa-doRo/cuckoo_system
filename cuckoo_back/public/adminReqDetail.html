@@ -31,7 +31,7 @@
                 <nav aria-label="breadcrumb">
                     <ol>
                         <li><a href="dashboard.html">Dashboard</a></li>
-                        <li><a href="adminReq.html"></a> Requests</li>
+                        <li><a href="adminReq.html"> Requests</a></li>
                         <li> Request ID: <span id="req-id"></span></li>
                     </ol>
                 </nav>
@@ -46,6 +46,10 @@
                         </div>
                         <div class="req-b">
                             <p id="req-message"></p>
+                            <div id="pics-container" class="hidden">
+                                <h4>Attachements:</h4>
+                                <div id="pictures"></div>
+                            </div>
                         </div>
                         <div class="req-action">
                             <button id="now" aria-label="answer now">Answer Now</button>
@@ -58,14 +62,18 @@
                         </div>
                     </div>
                 </section>
-                <div id="message-warning" class="warning">
-                    <div class="warning-content">
-                        <span class="close">&times;</span>
+                <div id="warning" class="modal warning-modal">
+                    <div class="modal-content">
                         <p id="warning-message"></p>
+                        <button class="close" aria-label="Close warning">Close</button>
                     </div>
                 </div>
             </main>
-
+            <div id="modalDiv" class="modal">
+                <span class="closeModal">&times;</span>
+                <img class="modal-content" id="img01">
+                <div id="caption"></div>
+            </div>
             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
             <script src="index2.js"></script>
     </body>

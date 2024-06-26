@@ -1,38 +1,44 @@
 // General site logic
-//Search nav bar
+
 document.addEventListener('DOMContentLoaded', function(){
+ //Search nav bar 
   var searchInput = document.querySelector('.search-input');
   var searchButton = document.querySelector('.search-button');
+  if (searchInput && searchButton){
   searchButton.addEventListener('click', function (event){
     if(document.activeElement !== searchInput) {
       event.preventDefault();
       searchInput.focus();
     }
   });
-});
+}
 
 // Requests page logic
 // logic to go back to dashboard usign the logo
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('admin-logo').addEventListener('click', function(){
+var adminLogo = document.getElementById('admin-logo');
+if (adminLogo){
+  adminLogo.addEventListener('click', function(){
     window.location.href = 'dashboard.html'
   });
-});
+}
 
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('cuckoo-clocks').addEventListener('click', function(){
+// logic to access content page
+var content = document.getElementById('cuckoo-clocks');
+if(content) {
+  content.addEventListener('click', function(){
     window.location.href = 'content.html'
   });
-});
+}
+
 // logic to access admin requests page
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('requests-dash').addEventListener('click', function(){
+var requestsDash = document.getElementById('requests-dash');
+if (requestsDash){
+  requestsDash.addEventListener('click', function(){
     window.location.href = 'adminReq.html'
   });
-});
+}
 
 // requests table logic
-document.addEventListener('DOMContentLoaded', () => {
   // event listener to create requests table
  if (document.getElementById('request-table-body')) {
   fetchRequests();
@@ -50,12 +56,14 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(fetchDashReqCount, 300000) //automatically update every 5 minutes
  }
   // event listener for new requests filtering button
-  if (document.getElementById('new-request')) {
-  document.getElementById('new-request').addEventListener('click', fetchNew);
+  var newRequest = document.getElementById('new-request');
+  if (newRequest) {
+  newRequest.addEventListener('click', fetchNew);
   }
   // event listener for all requests filtering button
-  if (document.getElementById('all-request')) {
-    document.getElementById('all-request').addEventListener('click', fetchAll);
+  var allRequest = document.getElementById('all-request');
+  if (allRequest) {
+    allRequest.addEventListener('click', fetchAll);
   }
   // event listener for request detail
   if (document.getElementById('req-details-section')) {
@@ -67,18 +75,34 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(data => requestDetails(data))
       .catch(error => console.error('error fetching request details', error));
     }
-    document.getElementById('now').addEventListener('click', () => {
-      handleNow();
-    });
-    document.getElementById('later').addEventListener('click', () => {
+     var nowButton = document.getElementById('now');
+     if (nowButton){
+      nowButton.addEventListener('click',
+      handleNow);
+    }
+    var laterButton = document.getElementById('later');
+    if (laterButton){
+      laterButton.addEventListener('click', () => {
       handleLater(requestID);
+      });
+    }
+    var sendButton = document.getElementById('send');
+    if (sendButton) {
+      sendButton.addEventListener('click', () => {
+      sendResponse(requestID);   
+    }); 
+  }
+    var closeButton = document.querySelector('.close');
+    if (closeButton) {
+      closeButton.addEventListener('click', () => {
+        var messageW = document.getElementById('message-warning');
+        if (messageW){
+          messageW.classList.add('hidden');
+          messageW.classList.remove('visible');
+          window.location.href = 'adminReq.html';
+        }
     });
-    document.getElementById('send').addEventListener('click', () => {
-      sendResponse(requestID);
-    });   
-    document.querySelector('close').addEventListener('click', () =>{
-      document.getElementById('message-warning').style.display = 'none';
-    });
+  }
   }   
 });
 
@@ -150,6 +174,23 @@ function requestDetails(data) {
   document.getElementById('req-subject').textContent = data.reqSubject;
   document.getElementById('req-date').textContent = new Date(data.reqDate).toLocaleDateString();
   document.getElementById('req-message').textContent = data.reqMessage;
+
+  const attachedContainer = document.getElementById('pics-container');
+  const attachedPics = document.getElementById('pictures');
+  if(data.reqPics) {
+    attachedContainer.classList.remove('hidden');
+    const picItem = document.createElement('img');
+    picItem.src = `data:image/jpeg;base64,${data.reqPics}`;
+    picItem.alt = 'Attached Picture';
+    picItem.classList.add('thumbnail');
+    attachedPics.appendChild(picItem);
+
+    picItem.addEventListener('click', function() {
+      openBigPic(this.src);
+    });
+  } else {
+    attachedContainer.classList.add('hidden');
+  }
 }
 
 function handleNow(){
@@ -171,8 +212,12 @@ function sendResponse(requestID) {
 
 function showWarning(message) {
   const warning = document.getElementById('message-warning');
-  document.getElementById('warning-message').textContent = message;
-  warning.style.display = 'block;'
+  const warningMessage = document.getElementById('warning-message');
+  if (warning && warningMessage){
+    warningMessage.textContent = message;
+    warning.classList.remove('hidden');
+    warning.style.display = 'block';
+  }
 }
 // Dashboard logic
 // fetch and display requests count for the admin dashboard
@@ -196,3 +241,22 @@ function updateDashReqCount(data) {
   }
 }
 
+// function to display the pictures in full size
+function openBigPic(imageSrc){
+  var modal = document.getElementById('modalDiv');
+  var modalPic = document.getElementById('img01');
+  var capText = document.getElementById('caption');
+  console.log('Modal Elements:', modal, modalPic, capText);
+
+  modal.style.display = 'block';
+  modalPic.src = imageSrc;
+  capText.innerHTML = 'Attached Picture';
+
+
+  var xModal = document.getElementsByClassName('closeModal')[0];
+  if (xModal){
+    xModal.onclick = function() {
+    modal.style.display = 'none';
+  };
+}
+}

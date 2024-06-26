@@ -63,7 +63,7 @@ router.get('/new', (req,res) =>{
 });  
 
 router.get('/:id', (req,res) =>{
-    const query =`SELECT r.id, r.reqDate, r.reqSubject, r.reqMessage, u.userName, u.userEmail FROM request r JOIN users u ON r.userID = u.id WHERE r.id = ?`;
+    const query =`SELECT r.id, r.reqDate, r.reqSubject, r.reqMessage, r.reqPics, u.userName, u.userEmail FROM request r JOIN users u ON r.userID = u.id WHERE r.id = ?`;
     connection.query(query, [req.params.id], (error, results) =>{
       if(error){
         res.status(500).json({ error: error.message });
@@ -72,6 +72,10 @@ router.get('/:id', (req,res) =>{
       if (results.length === 0) {
         res.status(404).json({error: 'Request not found'});
         return;
+      }
+      // convert BOLB images into base64 to display in admin site
+      if (results[0].reqPics) {
+        results[0].reqPics = results[0].reqPics.toString('base64');
       }
       res.json(results[0]);
     });
