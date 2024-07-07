@@ -5,7 +5,8 @@ const path = require('path');
 const catalogRoutes = require('./routes/catalog');
 const statusRoutes = require('./routes/status');
 const requestRoutes = require('./routes/request');
-const loginRoutes = require('./routes/login')
+const loginRoutes = require('./routes/login');
+const featureRoutes = require('./routes/featured');
 
 const app = express();
 const port = 3000;
@@ -15,11 +16,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+  console.log(`Received request for ${req.method} ${req.url}`);
+  next();
+})
+
 //routes
 app.use('/catalog', catalogRoutes);
 app.use('/status', statusRoutes);
 app.use('/request', requestRoutes);
 app.use('/login', loginRoutes);
+app.use('/featured', featureRoutes);
 
 // Serve HTML files
 app.get('/', (req, res) => {

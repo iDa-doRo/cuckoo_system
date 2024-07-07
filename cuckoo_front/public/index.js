@@ -65,31 +65,71 @@ if (icon) {
       }
     });
   }
+
  // slideshow
-  const track = document.querySelector('.slide-track');
+  const slide = document.querySelector('.slide-track');
   const prevButton = document.querySelector('.slide-prev');
   const nextButton = document.querySelector('.slide-next');
-  const items = document.querySelectorAll('.featured-item');
-  const itemWidth = items [0] ? items[0].offsetWidth: 0; // gives error, fix
   let position = 0;
 
-if (nextButton && track) {
+
+function updateSlideItems() {
+  console.log('Fetching restored items');
+  fetch('http://localhost:3000/featured')
+.then(response =>  {
+    console.log('Response status', response.status);
+   return response.json();
+})
+.then(data => {
+  console.log('Data received:', data);
+  if (slide && data.length > 0) {
+    slide.innerHTML = '';
+    data.forEach(item => {
+      const featuredItem = document.createElement('div');
+      featuredItem.className = 'featured-item';
+      featuredItem.setAttribute('aria-label', item.cuckooName);
+      featuredItem.setAttribute('role', 'img');
+      featuredItem.style.backgroundImage = `url(${item.cuckooPic})`;
+      featuredItem.textContent = item.cuckooName;
+      console.log(`Item: ${item.cuckooName}, Image URL: ${item.cuckooPic}`);
+
+      const img = new Image();
+      img.onload = function (){
+        console.log(`Image successfully loaded:${item.cuckooPic}`);
+      };
+      img.onerror = function() {
+        console.error(`Failed to load picture: ${item.cuckooPic}`);
+      };
+      img.src = item.cuckooPic; 
+      slide.appendChild(featuredItem);
+    });
+
+  const items = document.querySelectorAll('.featured-item');
+  const itemWidth = items [0] ? items[0].offsetWidth: 0;  
+
+if (nextButton) {
   nextButton.addEventListener('click', function() {
     if (position > -(items.length -1) * itemWidth){
       position -= itemWidth;
-      track.style.transform = `translateX(${position}px)`;
+      slide.style.transform = `translateX(${position}px)`;
     }
   });
 }
 
-if (prevButton && track) {
+if (prevButton) {
   prevButton.addEventListener('click', function() {
     if (position < 0){
       position += itemWidth;
-      track.style.transform = `translateX(${position}px)`;
+      slide.style.transform = `translateX(${position}px)`;
     }
   });
 }
+}
+})
+.catch(error => console.error('error trying to fetch restored items', error));
+}
+updateSlideItems();
+
 // catalog 
 const catalogItemsContainer = document.querySelector('.catalog-items');
 const statusFilterContainer = document.getElementById('status-filter');

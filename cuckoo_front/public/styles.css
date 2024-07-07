@@ -9,7 +9,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: palevioletred;
+    background-color: #fffff0;
+    color: #36454f;
   }
   .visually-hidden{
     position: absolute;
@@ -23,6 +24,8 @@ body {
   }
 
 header {
+  background-color: #4b2e2e;
+  color: #fffff0;
   padding: 0.5rem 0;
   text-align: center;
 }  
@@ -48,7 +51,7 @@ header {
   .search-input{
     width: 0;
     padding: 0;
-    border: none;
+    border: 1px solid #228b22;
     border-radius: 5px;
     outline: none;
   }
@@ -68,12 +71,19 @@ header {
     width: 50px;
     height: 50px;
     background-size: contain;
-    background-color: transparent;
+    background-color: #228B22;
     background-repeat: no-repeat;
     background-position: center center;
     display: inline-block;
     cursor: pointer;
-    border: none;
+    border: 2px solid #4b2e2e;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .icon:hover {
+    background-color: #e97451;
+    border-color: #daa520;
   }
 
   .search-i{
@@ -110,13 +120,19 @@ nav ul li {
 
 nav a{
   display: block;
-  border: 5px solid black;
+  border: 5px solid #228b22;
   text-decoration: none;
-  color: white;
+  font-size: 1.25rem;
+  background-color: #556b2f;
+  color: #fffff0;
   padding: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  
 }
 nav a:hover{
-  text-decoration: underline;
+  background-color: #e97451;
+  border-color: #daa520;
 }
 
 /* main style */
@@ -133,8 +149,9 @@ nav a:hover{
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-color: blueviolet;
+  background-color: #d2b48c;
   position: relative;
+  padding: 2rem;
 }
 
 .slideshow-container{
@@ -164,10 +181,11 @@ nav a:hover{
   top: 50%;
   padding: 15px 10px;
   cursor: pointer;
-  background: #333;
-  color: white; 
-  border: 5px solid black;
+  background: #e97451;
+  color: #fffff0; 
+  border: 5px solid #4b2e2e;
   z-index: 1;
+  border-radius: 50%;
 }
 
 .slide-prev{
@@ -182,13 +200,14 @@ nav a:hover{
 /* catalog style */
 .breadcrumb {
   margin: 0 2rem;
-  background-color: burlywood;
+  background-color: #4b2e2e;
   border: none;
 }
 .breadcrumb a {
   text-decoration: none;
   border: none;
   display: inline-block;
+  color: #fffff0;
 }
 .content {
   display: flex;
@@ -198,7 +217,7 @@ nav a:hover{
 aside {
   width: 200px;
   padding-right: 20px;
-  background-color: aquamarine;
+  background-color: #8a9a5b;
   margin: 0 2rem;
 }
 
@@ -208,8 +227,9 @@ aside h2, aside h3 {
 
 aside ul {
   list-style: none;
-  padding: 0;
+  padding: 5px;
 }
+
  aside ul li {
   margin-bottom: 10px;
  }

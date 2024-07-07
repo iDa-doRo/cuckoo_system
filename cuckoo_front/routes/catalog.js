@@ -17,7 +17,7 @@ db.connect(err => {
   console.log('MySQL connected...');
 });
 
-router.use(express.static('public'));
+
 // Retrieve all products
 router.get('/all', (req, res) => {
   const sql = 'SELECT cuckooName, cuckooPrice, cuckooDesc, cuckooPic, cuckooStatus FROM cuckoo';
@@ -52,5 +52,5 @@ router.get('/', (req, res) => {
     res.json(results);
   });
 });
-module.exports = router;
 
+router.use(express.static('public'));
