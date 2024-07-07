@@ -16,22 +16,32 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/res', express.static(path.join(__dirname, 'res')));
+
 app.use((req, res, next) => {
   console.log(`Received request for ${req.method} ${req.url}`);
   next();
 })
+console.log('Feature route:', featureRoutes);
+console.log('Type of feature route', typeof featureRoutes);
 
 //routes
 app.use('/catalog', catalogRoutes);
 app.use('/status', statusRoutes);
 app.use('/request', requestRoutes);
 app.use('/login', loginRoutes);
-app.use('/featured', featureRoutes);
+
+app.use('/featured', (req, res, next) => {
+  console.log('Received request for /featured');
+  next();
+}, featureRoutes);
 
 // Serve HTML files
 app.get('/', (req, res) => {
+  console.log('serving home.html');
   res.sendFile(path.join(__dirname, 'public', 'home.html'));
 });
+
 
 app.get('/catalog', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'catalog.html'));
@@ -39,6 +49,12 @@ app.get('/catalog', (req, res) => {
 
 app.get('/request', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'service-form.html'));
+}); 
+
+
+app.use((err, req, res, next) => {
+  console.error('Error:', err);
+  res.status(500).send('Internal Server Error');
 });
 
 app.listen(port, () => {

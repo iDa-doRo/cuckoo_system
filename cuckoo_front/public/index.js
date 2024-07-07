@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const reqServiceButton = document.getElementById('reqServiceButton');
 if (reqServiceButton) {
   reqServiceButton.addEventListener('click', function() {
-    window.location.href = 'service-from.html';
+    window.location.href = 'service-form.html';
   });
 }
 });

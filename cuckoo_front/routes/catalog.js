@@ -16,7 +16,7 @@ db.connect(err => {
   }
   console.log('MySQL connected...');
 });
-
+router.use(express.static('public'));
 
 // Retrieve all products
 router.get('/all', (req, res) => {
@@ -53,4 +53,4 @@ router.get('/', (req, res) => {
   });
 });
 
-router.use(express.static('public'));
+module.exports = router;

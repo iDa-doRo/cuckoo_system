@@ -17,10 +17,11 @@ db.connect(err => {
   console.log('MySQL connected...');
 });
 
+
 // retrieve only restored products
 router.get('/', (req,res) => {
   console.log('Received request for restored products');
-  const sql = "SELECT cuckooName, cuckooPrice, cuckooDesc, cuckooPic, cuckooStatus FROM cuckoo WHERE cuckooStatus = 'Restored'";
+  const sql = "SELECT cuckooName, cuckooPrice, cuckooPic, cuckooStatus FROM cuckoo WHERE cuckooStatus = 'Restored'";
   console.log('Executing sql query', sql);
 
   db.query(sql, (err, results) => {
@@ -33,4 +34,10 @@ router.get('/', (req,res) => {
     res.json(results);
   });
 });
+
+router.get('/test', (req,res) => {
+  console.log('test route');
+  res.send('test route working');
+});
+
 module.exports = router;
