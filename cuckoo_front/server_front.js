@@ -4,8 +4,8 @@ const cors = require('cors');
 const path = require('path');
 const catalogRoutes = require('./routes/catalog');
 const statusRoutes = require('./routes/status');
-const  {db, createUser} = require('./routes/users');
 const requestRoutes = require('./routes/request');
+const loginRoutes = require('./routes/login')
 
 const app = express();
 const port = 3000;
@@ -19,6 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/catalog', catalogRoutes);
 app.use('/status', statusRoutes);
 app.use('/request', requestRoutes);
+app.use('/login', loginRoutes);
 
 // Serve HTML files
 app.get('/', (req, res) => {
@@ -32,7 +33,6 @@ app.get('/catalog', (req, res) => {
 app.get('/request', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'service-form.html'));
 });
-
 
 app.listen(port, () => {
   console.log(`Public app listening at http://localhost:${port}`);

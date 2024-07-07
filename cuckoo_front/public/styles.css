@@ -342,3 +342,35 @@ textarea {
   background-color: firebrick;
   margin-top: 10px;
 }
+
+/* login style */
+.login-modal{
+  display: none;
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 50%;
+  overflow: auto;
+}
+
+.login-content {
+  background-color: tan;
+  margin: 15px auto;
+  padding: 25px;
+  border: 1px solid khaki;
+}
+
+.close-login{
+  color: #333;
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.close-login:hover, .close-login:focus{
+  color: goldenrod;
+  text-decoration: none;
+  cursor: pointer;
+}

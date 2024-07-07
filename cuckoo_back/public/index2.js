@@ -95,7 +95,7 @@ if (requestsDash){
     var closeButton = document.querySelector('.close');
     if (closeButton) {
       closeButton.addEventListener('click', () => {
-        var messageW = document.getElementById('message-warning');
+        var messageW = document.getElementById('warning');
         if (messageW){
           messageW.classList.add('hidden');
           messageW.classList.remove('visible');
@@ -199,6 +199,7 @@ function handleNow(){
     responseShow.classList.remove('hidden');
     responseShow.classList.add('visible');
   }
+  
 
 
 }
@@ -209,16 +210,29 @@ function handleLater(requestID){
 function sendResponse(requestID) {
   showWarning(`Response to request ID:${requestID} successfully sent to user.`);
 }
-
+//show warning message depending on button pressed
 function showWarning(message) {
-  const warning = document.getElementById('message-warning');
+  const warning = document.getElementById('warning');
   const warningMessage = document.getElementById('warning-message');
   if (warning && warningMessage){
     warningMessage.textContent = message;
     warning.classList.remove('hidden');
+    warning.classList.add('visible');
     warning.style.display = 'block';
   }
 }
+
+//close warning message and redirect to request page
+var closeWarning = document.querySelector('.warning modal .close');
+if (closeWarning){
+  closeWarning.addEventListener('clcik', function() {
+    var modalWarning = document.getElementById('warning');
+    if (modalWarning) {
+      modalWarning.style.display = 'none';
+    }
+  });
+}
+
 // Dashboard logic
 // fetch and display requests count for the admin dashboard
 function fetchDashReqCount() {

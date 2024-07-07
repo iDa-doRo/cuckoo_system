@@ -275,38 +275,7 @@ margin-top: 20px;
   background-color: palegoldenrod;
 }
 
-.warning-modal{
-  display: none;
-  background-color: lightseagreen;
-  color: beige;
-  padding: 10px;
-  border-radius: 3px;
-  margin-top: 20px;
-}
-
-.warning-modal.visible{
-  display: block;
-}
-
-.warning-modal .warning-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.warning-modal .close{
-  cursor: pointer;
-  background-color: blue;
-  color: white;
-  border: none;
-  border-radius: 3px;
-  padding: 5px 10px;
-}
-
-.warning-modal .close:hover{
-  background-color: darkmagenta;
-}
-
+/* show and hide modals */
 .hidden {
   display: none;
 }
@@ -315,6 +284,7 @@ margin-top: 20px;
   display: block;
 }
 
+/* modal zoom pictures on click */
 #pictures img {
   width: 100px;
   height: auto;
@@ -375,3 +345,46 @@ margin-top: 20px;
   text-decoration: none;
   cursor: pointer;
 }
+/* warning modal display style */
+.warning-modal{
+  display: none;
+  position: fixed;
+  background-color: lightseagreen;
+  color: beige;
+  padding: 25px;
+  transform: translate(-50%, -50%);
+  border-radius: 3px;
+  margin-top: 20px;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  text-align: center;
+  width: 80%;
+  max-width: 400px;
+}
+
+.warning-modal.visible{
+  display: block;
+}
+
+.warning-modal .warning-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.warning-modal .close{
+  cursor: pointer;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  margin-top: 10px;
+}
+
+.warning-modal .close:hover{
+  background-color: darkmagenta;
+}
+

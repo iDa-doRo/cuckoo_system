@@ -3,9 +3,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-const multer = require('multer');
 const contentRoutes = require('./routes/content');
 const requestRoutes = require('./routes/requests');
+const loginRoutes = require('./routes/login');
 
 const app = express();
 const port = 3001;
@@ -18,6 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Admin routers
 app.use('/content', contentRoutes);
 app.use('/requests', requestRoutes);
+app.use('/login', loginRoutes);
 
 // Serve HTML files
 app.get('/', (req, res) => {
