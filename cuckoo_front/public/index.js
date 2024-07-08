@@ -87,6 +87,55 @@ function updateSlideItems() {
     data.forEach(item => {
       const featuredItem = document.createElement('div');
       featuredItem.className = 'featured-item';
+
+      const pic = document.createElement('img');
+      pic.src = item.cuckooPic;
+      pic.alt = item.cuckooName;
+      pic.className = 'featured-pic';
+
+      const info = document.createElement('div');
+      info.className = 'featured-info';
+
+      const name = document.createElement('h3');
+      name.className = 'featured-name';
+      name.textContent = item.cuckooName;
+
+      const price = document.createElement('p');
+      price.className = 'featured-price';
+      price.textContent = `${item.cuckooPrice}€`;
+
+      info.appendChild(name);
+      info.appendChild(price);
+      featuredItem.appendChild(pic);
+      featuredItem.appendChild(info);
+      slide.appendChild(featuredItem);
+    });
+    updatePosition();
+  }
+})
+.catch(error => console.error('Error tryinto to fetch data:', error));
+}
+const updatePosition = () => {
+  const width = slide.children[position].offsetWidth;
+  slide.style.transform = `translateX(-${position * width}px)`;
+};
+
+prevButton.addEventListener('click', () => {
+  if (position > 0) {
+    position--;
+    updatePosition();
+  }
+});
+
+nextButton.addEventListener('click', () => {
+  if (position < slide.children.length -1) {
+    position++;
+    updatePosition();
+  }
+});
+updateSlideItems();
+});
+      /* featuredItem.className = 'featured-item';
       featuredItem.setAttribute('aria-label', item.cuckooName);
       featuredItem.setAttribute('role', 'img');
       featuredItem.style.backgroundImage = `url(${item.cuckooPic})`;
@@ -128,7 +177,7 @@ if (prevButton) {
 })
 .catch(error => console.error('error trying to fetch restored items', error));
 }
-updateSlideItems();
+updateSlideItems(); */
 
 // catalog 
 const catalogItemsContainer = document.querySelector('.catalog-items');
@@ -208,7 +257,6 @@ fetch('http://localhost:3000/status')
 }
 
 fetchCatalogItems();
-});
 // service logic to access service form
 document.addEventListener('DOMContentLoaded', function() {
 const reqServiceButton = document.getElementById('reqServiceButton');

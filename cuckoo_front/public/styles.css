@@ -157,44 +157,74 @@ nav a:hover{
 .slideshow-container{
   position: relative;
   max-width: 320px;
+  margin: 0 auto;
 }
+
 .slideshow{
   overflow: hidden;
   width: 320px;
-  height: 300px;
+  height: auto;
+  position: relative;
 }
+
 .slide-track{
   display: flex;
   transition:transform 0.5s ease-in-out;
 }
 .featured-item{
-  flex: 0 0 auto;
-  width: 320px;
-  height: 300px;  
-  background-size: contain;
-  background-position: center;
+  flex: 0 0 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #4b2e2e;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.featured-pic {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.fetarured-info {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.fetured-name {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.featured.price {
+  font-size: 1rem;
+  color: #333;
 }
 
 /*slideshow buttons*/
 .slide-prev, .slide-next{
   position: absolute;
   top: 50%;
+  transform: translateY(-50%);
   padding: 15px 10px;
   cursor: pointer;
   background: #e97451;
   color: #fffff0; 
-  border: 5px solid #4b2e2e;
+  border: 2px solid #4b2e2e;
   z-index: 1;
   border-radius: 50%;
+  font-size: 18px;
+  line-height: 1;
+  text-align: center;
 }
 
 .slide-prev{
-  left: 0;
-  transform: translate(-50%, -50%);
+  left: -50px;
 }
+
 .slide-next{
-  right: 0;
-  transform: translate(-50%, -50%);
+  right: -50px;
 }
 
 /* catalog style */
