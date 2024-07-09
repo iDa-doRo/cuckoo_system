@@ -135,49 +135,6 @@ nextButton.addEventListener('click', () => {
 });
 updateSlideItems();
 });
-      /* featuredItem.className = 'featured-item';
-      featuredItem.setAttribute('aria-label', item.cuckooName);
-      featuredItem.setAttribute('role', 'img');
-      featuredItem.style.backgroundImage = `url(${item.cuckooPic})`;
-      featuredItem.textContent = item.cuckooName;
-      console.log(`Item: ${item.cuckooName}, Image URL: ${item.cuckooPic}`);
-
-      const img = new Image();
-      img.onload = function (){
-        console.log(`Image successfully loaded:${item.cuckooPic}`);
-      };
-      img.onerror = function() {
-        console.error(`Failed to load picture: ${item.cuckooPic}`);
-      };
-      img.src = item.cuckooPic; 
-      slide.appendChild(featuredItem);
-    });
-
-  const items = document.querySelectorAll('.featured-item');
-  const itemWidth = items [0] ? items[0].offsetWidth: 0;  
-
-if (nextButton) {
-  nextButton.addEventListener('click', function() {
-    if (position > -(items.length -1) * itemWidth){
-      position -= itemWidth;
-      slide.style.transform = `translateX(${position}px)`;
-    }
-  });
-}
-
-if (prevButton) {
-  prevButton.addEventListener('click', function() {
-    if (position < 0){
-      position += itemWidth;
-      slide.style.transform = `translateX(${position}px)`;
-    }
-  });
-}
-}
-})
-.catch(error => console.error('error trying to fetch restored items', error));
-}
-updateSlideItems(); */
 
 // catalog 
 const catalogItemsContainer = document.querySelector('.catalog-items');
@@ -209,7 +166,9 @@ function fetchCatalogItems(status) {
    productElement.appendChild(productTile);
    const productDescription = document.createElement('p');
    productDescription.textContent = item.cuckooDesc;
-   productElement.appendChild(productDescription);const productPrice = document.createElement('div');
+   productElement.appendChild(productDescription);
+   const productPrice = document.createElement('div');
+   productPrice.className = 'price';
    productPrice.textContent = `€${parseFloat(item.cuckooPrice).toFixed(2)}`;
    productElement.appendChild(productPrice);
    const productStatus = document.createElement('div');
@@ -231,6 +190,7 @@ fetch('http://localhost:3000/status')
   const allA = document.createElement('a');
   allA.href = '#';
   allA.textContent = 'Show All';
+  allA.className ='filter';
   allA.setAttribute('aria-label', 'show all');
   allA.addEventListener('click', (e) => {
     e.preventDefault();
@@ -244,6 +204,7 @@ fetch('http://localhost:3000/status')
     const a = document.createElement('a');
     a.href = '#';
     a.textContent = status.cuckooStatus;
+    a.className = 'filter';
     a.setAttribute('aria-label', status.cuckooStatus);
     a.addEventListener('click', (e) => {
       e.preventDefault();
@@ -265,7 +226,6 @@ if (reqServiceButton) {
     window.location.href = 'service-form.html';
   });
 }
-});
   
   //Form logic
   const serviceRequestForm = document.getElementById('serviceRequest');
@@ -304,3 +264,13 @@ closeButton.addEventListener('click', function(){
   document.getElementById('successMessage').hidden = true;
 });
 }
+
+// small devices logic
+const menu = document.querySelector('.menu');
+const mainNav = document.querySelector('.main-navigation');
+if (menu) {
+  menu.addEventListener('click', function() {
+    mainNav.classList.toggle('show');
+  });
+}
+});

@@ -13,17 +13,25 @@
     <body>
         <header class="flex-container" role="banner">
             <div class="top-bar flex-container">
-                <form action="/search" method="get" class="search-box" role="search">
-                    <label for="search-box" class="visually-hidden">Search the site content</label>
-                    <input type="search" id="search-box" class="search-input" placeholder="search..." tabindex="0"
-                        aria-label="search the site content">
-                    <button type="submit" class="search-button" tabindex="0" aria-label="Submit search"><span
-                            class="icon search-i"></span></button>
-                </form>
-                <button class="icon user-i" tabindex="0" aria-label="User account"></button>
-                <button class="icon basket-i" tabindex="0" aria-label="Your shopping basket"></button>
+                <a href="home.html" class="logo-link">
+                    <img src="pics/logo.png" alt="Mr. Cucut" class="logo">
+                </a>
+                <div class="icons">
+                    <form action="/search" method="get" class="search-box" role="search">
+                        <label for="search-box" class="visually-hidden">Search the site content</label>
+                        <input type="search" id="search-box" class="search-input" placeholder="search..." tabindex="0"
+                            aria-label="search the site content">
+                        <button type="submit" class="search-button" tabindex="0" aria-label="Submit search"><span
+                                class="icon search-i"></span></button>
+                    </form>
+                    <div class="icon-container">
+                        <button class="icon user-i" tabindex="0" aria-label="User account"></button>
+                        <button class="icon basket-i" tabindex="0" aria-label="Your shopping basket"></button>
+                    </div>
+                </div>
+                <button class="menu" aria-label="menu">&#9776;</button>
             </div>
-            <nav role="navigation">
+            <nav role="navigation" class="main-navigation">
                 <ul>
                     <li><a href="catalog.html" tabindex="0">Catalogue</a></li>
                     <li><a href="locations.html" tabindex="0">Locations</a></li>
@@ -41,6 +49,19 @@
                 <button id="reqServiceButton">Request Service</button>
             </section>
         </main>
+        <div id="login-modal" class="login-modal">
+            <div class="login-content">
+                <span class="close-login">&times;</span>
+                <form id="login-form">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" id="username" required>
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <p id="login-error">Invalid credentials</p>
+            </div>
+        </div>
         <footer role="contentinfo"></footer>
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script src="index.js"></script>
