@@ -19,8 +19,10 @@ db.connect(err => {
 router.use(express.static('public'));
 
 // Retrieve all products
-router.get('/all', (req, res) => {
+router.get('/all', (req, res) => {0
+  console.log('Received request for catalog items');
   const sql = 'SELECT cuckooName, cuckooPrice, cuckooDesc, cuckooPic, cuckooStatus FROM cuckoo';
+  console.log('quering all catalog products to database:', sql);
   db.query(sql, (err, results) => {
     if (err) throw err;
     res.json(results);
@@ -31,6 +33,7 @@ router.get('/all', (req, res) => {
 router.get('/:id', (req, res) => {
   const { id } = req.params;
   const sql = 'SELECT cuckooName, cuckooPrice, cuckooDesc, cuckooPic, cuckooStatus FROM cuckoo WHERE id = ?';
+  
   db.query(sql, id, (err, result) => {
     if (err) throw err;
     res.json(result);

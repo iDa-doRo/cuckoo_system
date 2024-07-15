@@ -14,7 +14,7 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0;
-    background-color: palevioletred;
+    background-color: #ffffff;
   }
 .visually-hidden{
   position: absolute;
@@ -31,10 +31,10 @@ body {
   /* nav and search style */
   .dashboard{
     width: 100%;
-    max-width: 1200px;
-    height: 100vh;
-    border: 2px solid goldenrod;
-    background-color: turquoise;
+    max-width: 1400px;
+    height: 95vh;
+    border: 2px solid #007bff;
+    background-color: #ffffff;
     border-radius: 5px;
     overflow: hidden;
   }
@@ -44,19 +44,20 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: plum;
+    background-color: #0D1B2a;
     flex: 0 0 auto;
   }
 .logo{
-  font-size: 24px;
+  font-size: 2rem;
   font-weight: bold;
   cursor: pointer;
+  color: #ffffff;
 
 }
   .top-bar{
     display: flex;
     justify-content: center;
-    padding:1rem 3rem;
+    padding:1rem 0;
   }
 
   /* search sytle */
@@ -71,6 +72,7 @@ body {
     border-radius: 5px;
     width: 0;
    outline: none;
+   transition: width 0.4s ease-in-out;
   }
 
   .search-input:focus{
@@ -88,12 +90,13 @@ body {
     width: 50px;
     height: 50px;
     background-size: contain;
-    background-color: transparent;
+    background-color: #ffffff;
     background-repeat: no-repeat;
     background-position: center center;
     display: inline-block;
     cursor: pointer;
-    border: none;
+    border: 1px solid #0d1b2a;
+    border-radius: 10px;
   }
 
   .search-i{
@@ -124,25 +127,32 @@ body {
   .dash-button{
     width: 100%;
     height: 15vh;
-    background-color: blanchedalmond;
-    border: 1px solid #ccc;
+    background-color: #007bff;
+    border: 1px solid #333333;
     border-radius: 8px;
-    font-size: 18px;
+    font-size: 1.5rem;
+    color: #ffffff;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px;
+    transition: background-color 0.3s ease;
   }
+
+  .dash-button:hover {
+    background-color: #0056b3;
+  }
+
   .pin{
     position: absolute;
     top: -10px;
     right: -10px;
-    background-color: salmon;
-    color: black;
+    background-color: #dc3545;
+    color: #ffffff;
     border-radius: 50%;
     padding: 5px 10px;
-    font-size: 14px;
+    font-size: 0.87rem;
   }
 /* admin request style */
   .admin-req-main{
@@ -168,18 +178,27 @@ nav[aria-label='breadcrumb'] li +li:before {
 
 .req-buttons button{
   position: relative;
-  padding: 10px;
+  padding: 25px;
   cursor: pointer;
+  background-color: #007bff;
+  color: #ffffff;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
+.req-buttons button:hover {
+ background-color: #0056b3;
+}
+
 .req-buttons button span {
-  background-color: rgb(168, 47, 47);
-  color: white;
+  background-color: #dc3545;
+  color: #ffffff;
   border-radius: 50%;
   padding: 2px 8px;
   position: absolute;
   top: -5px;
   right: -10px;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 .req-table {
   width: 100%;
@@ -187,84 +206,100 @@ nav[aria-label='breadcrumb'] li +li:before {
 }
 
 .req-table, th, td {
-  border: 1px solid #1d0730;
+  border: 1px solid #0D1B2a;
 }
 
 th, td {
   text-align: left;
   padding: 10px;
 }
+th {
+  background-color: #0D1B2a;
+  color: #ffffff;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+  background-color: #ddd;
+}
 
 /* request details style */
-
-
 .req-details{
-background-color: orange;
+background-color: #e9f7ef;
 padding: 20px;
 border-radius: 3px;
 box-shadow: 0 2px 4px rgba(0,0, 0, 0.1);
 }
 
-.req-details .req-h{
-  border-bottom: 1px solid cornflowerblue;
+.req-h{
+  border-bottom: 1px solid #007bff;
   padding-bottom: 10px;
   margin-bottom: 10px;
 }
 
-.req-details .req-h h3{
+.req-h h3{
   margin: 0 0 10px 0;
+  font-size: 1.25rem;
 }
-
-.req-details .req-h p{
+.req-h p{
   margin: 5px 0;
+  font-size: 1rem;
 }
 
-.req-details .req-b{
+.req-b{
   padding: 10px 0;
+  font-size: 1rem;
 }
 
-.req-details .req-action{
+.req-action{
 display: flex;
 flex-wrap: wrap;
 justify-content: space-between;
 margin-top: 20px;
 }
 
-.req-details .req-action button {
-  background-color: aquamarine;
-  color: black;
+.req-action button {
+  background-color: #007bff;
+  color: #ffffff;
   border: none;
   padding: 10px 20px;
   border-radius: 3px;
   cursor: pointer;
-  margin-bottom: 10px;
+  margin-right: 10px;
+  font-size: 1rem;
 }
 
-.req-details .req-action button:hover{
-  background-color: navajowhite;
+.req-action button:hover{
+  background-color: #0056b3;
 }
-
-.req-details .res-section{
+.res-section{
   margin-top: 20px;
-  padding: 2rem;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dc3545;
+  border-radius: 5px;
 }
 
 .req-details .res-section label{
   display: block;
   margin-bottom: 5px;
+  font-size: 1rem;
 }
 
-.req-details .res-section textarea{
+.res-section textarea{
   width: 100%;
-  border: 1px solid coral;
+  border: 1px solid #007bff;
   padding: 10px;
   border-radius: 3px;
   resize: vertical;
 }
 
-.req-details .res-section button {
-  background-color: skyblue;
-  color: black;
+.res-section button {
+  background-color:#007bff;
+  color: #ffffff;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
@@ -272,7 +307,7 @@ margin-top: 20px;
   margin-top: 10px;
 }
 .req-details .res-section button:hover{
-  background-color: palegoldenrod;
+  background-color: #0056b3;
 }
 
 /* show and hide modals */
@@ -302,15 +337,23 @@ margin-top: 20px;
   width: 100%;
   height: 100%;
   overflow: auto;
+  background: rgba(0,0, 0, 0.5);
+}
+
+.modal-container{
+  position: relative;
+  margin: auto;
+  width: 80%;
+  padding: 20px;
+  max-width: 600px;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0, 0, 0.1);
 }
 
 .modal-content {
-  margin: 5% auto;
-  width: 80%;
-  display: block;
-  max-width: 600px;
-  border: 1px solid springgreen;
-  padding: 20px;
+  width: 100%;
+  border-radius: 5px;
 }
 
 #caption {
@@ -320,7 +363,7 @@ margin-top: 20px;
   max-width: 700px;
   text-align: center;
   padding: 10px 0;
-  color: purple;
+  color: #0D1B2a;
 }
 
 .modal-content #caption{
@@ -334,23 +377,26 @@ margin-top: 20px;
 }
 
 .closeModal {
-  float: right;
+  position: absolute;
+  top: 10px;
+  right: 10px;
   font-size: 40px;
   font-weight: bold;
-  color: lightslategrey;
+  color: #333333;
+  cursor: pointer;
 }
 
 .closeModal:hover, .closeModal:focus {
-  color: indianred;
+  color: #dc3545;
   text-decoration: none;
-  cursor: pointer;
 }
+
 /* warning modal display style */
 .warning-modal{
   display: none;
   position: fixed;
-  background-color: lightseagreen;
-  color: beige;
+  background-color: #fd7e14;
+  color: #ffffff;
   padding: 25px;
   transform: translate(-50%, -50%);
   border-radius: 3px;
@@ -376,8 +422,8 @@ margin-top: 20px;
 
 .warning-modal .close{
   cursor: pointer;
-  background-color: blue;
-  color: white;
+  background-color: #007bff;
+  color: #ffffff;
   border: none;
   border-radius: 3px;
   padding: 5px 10px;
@@ -385,6 +431,6 @@ margin-top: 20px;
 }
 
 .warning-modal .close:hover{
-  background-color: darkmagenta;
+  background-color: #0056b3;
 }
 

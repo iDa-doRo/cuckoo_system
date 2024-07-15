@@ -22,8 +22,6 @@ app.use((req, res, next) => {
   console.log(`Received request for ${req.method} ${req.url}`);
   next();
 })
-console.log('Feature route:', featureRoutes);
-console.log('Type of feature route', typeof featureRoutes);
 
 //routes
 app.use('/catalog', catalogRoutes);
@@ -36,7 +34,7 @@ app.use('/featured', (req, res, next) => {
   next();
 }, featureRoutes);
 
-// Serve HTML files
+// Serve HTML files middleware
 app.get('/', (req, res) => {
   console.log('serving home.html');
   res.sendFile(path.join(__dirname, 'public', 'home.html'));
@@ -44,10 +42,12 @@ app.get('/', (req, res) => {
 
 
 app.get('/catalog', (req, res) => {
+  console.log('serving catalog.html');
   res.sendFile(path.join(__dirname, 'public', 'catalog.html'));
 });
 
 app.get('/request', (req, res) => {
+  console.log('serving request.html');
   res.sendFile(path.join(__dirname, 'public', 'service-form.html'));
 }); 
 
@@ -56,6 +56,7 @@ app.use((err, req, res, next) => {
   console.error('Error:', err);
   res.status(500).send('Internal Server Error');
 });
+
 
 app.listen(port, () => {
   console.log(`Public app listening at http://localhost:${port}`);

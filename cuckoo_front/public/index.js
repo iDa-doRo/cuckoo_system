@@ -10,16 +10,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 if (icon) {
   icon.addEventListener('click', function(){
+    login.setAttribute('aria-hidden', 'false');
     login.style.display = 'block';
+    close.focus();
   });
 }
  if (close) {
   close.addEventListener('click', function() {
+    close.setAttribute('aria-hidden', 'false');
   login.style.display = 'none';
+  icon.focus();
   });
  }
   window.addEventListener('click', function(event){
     if (event.target == login) {
+      login.setAttribute('aria-hidden', 'true');
       login.style.display = 'none';
     }
   });
@@ -52,7 +57,7 @@ if (icon) {
     });
   });
   }
-
+  // FR1.2 Shall provide a search functionality for quick access to specific items. 
   //search
   var searchInput = document.querySelector('.search-input');
   var searchButton = document.querySelector('.search-button');
@@ -87,22 +92,27 @@ function updateSlideItems() {
     data.forEach(item => {
       const featuredItem = document.createElement('div');
       featuredItem.className = 'featured-item';
-
+      featuredItem.setAttribute('aria-label', 'Featured item');
       const pic = document.createElement('img');
       pic.src = item.cuckooPic;
-      pic.alt = item.cuckooName;
+      // FR1.3 All images and media shall provide alternative text.
+      pic.alt = `${item.cuckooName} image`;
       pic.className = 'featured-pic';
+      pic.setAttribute('aria-label', `Image of ${item.cuckooName}`);
 
       const info = document.createElement('div');
       info.className = 'featured-info';
+      info.setAttribute('aria-label', 'Item information');
 
       const name = document.createElement('h3');
       name.className = 'featured-name';
       name.textContent = item.cuckooName;
+      name.setAttribute('aria-label', `Name: ${item.cuckooName}`);
 
       const price = document.createElement('p');
       price.className = 'featured-price';
       price.textContent = `${item.cuckooPrice}€`;
+      price.setAttribute('aria-label', `Price: ${item.cuckooPrice}`);
 
       info.appendChild(name);
       info.appendChild(price);
@@ -115,26 +125,32 @@ function updateSlideItems() {
 })
 .catch(error => console.error('Error tryinto to fetch data:', error));
 }
+
 const updatePosition = () => {
+  if (slide.children.length > 0) {
   const width = slide.children[position].offsetWidth;
   slide.style.transform = `translateX(-${position * width}px)`;
+  }
 };
 
-prevButton.addEventListener('click', () => {
-  if (position > 0) {
-    position--;
-    updatePosition();
-  }
-});
-
-nextButton.addEventListener('click', () => {
-  if (position < slide.children.length -1) {
+if (prevButton) {
+  prevButton.addEventListener('click', () => {
+    if (position > 0) {
+      position--;
+      updatePosition();
+    }
+  });
+}
+if (nextButton) {
+  nextButton.addEventListener('click', () => {  
+    if (position < slide.children.length -1) {
     position++;
     updatePosition();
   }
 });
+}
 updateSlideItems();
-});
+
 
 // catalog 
 const catalogItemsContainer = document.querySelector('.catalog-items');
@@ -152,28 +168,37 @@ function fetchCatalogItems(status) {
     catalogItemsContainer.innerHTML = '';
     data.forEach(item => {
     const productElement = document.createElement('div');
-   productElement.className = 'product';   
+    productElement.className = 'product'; 
+    productElement.setAttribute('aria-label', 'Product item');
+
    if(item.cuckooPic) {
      const productImage = document.createElement('img');
      productImage.src = item.cuckooPic;
-     productImage.alt = item.cuckooName;
+     productImage.alt = `${item.cuckooName}, image`;
+     productImage.setAttribute('aria-label', `Image of: ${item.cuckooName}`);
      productElement.appendChild(productImage);
    }
+   //FR1.1 Shall support keyboard navigation and be compatible with screen readers. 
    productElement.setAttribute('role', 'article');
    productElement.setAttribute('aria-label', `Item ${item.cuckooName}`);
+
   const productTile = document.createElement('h3');
    productTile.textContent = item.cuckooName;
+   productTile.setAttribute('aria-label', `Item ${item.cuckooName}`);
    productElement.appendChild(productTile);
+
    const productDescription = document.createElement('p');
    productDescription.textContent = item.cuckooDesc;
    productElement.appendChild(productDescription);
+
    const productPrice = document.createElement('div');
    productPrice.className = 'price';
    productPrice.textContent = `€${parseFloat(item.cuckooPrice).toFixed(2)}`;
    productElement.appendChild(productPrice);
+
    const productStatus = document.createElement('div');
    productStatus.textContent = item.cuckooStatus;
-   productElement.appendChild(productStatus);
+    productElement.appendChild(productStatus);
 
    catalogItemsContainer.appendChild(productElement);
     });
@@ -218,28 +243,30 @@ fetch('http://localhost:3000/status')
 }
 
 fetchCatalogItems();
+
 // service logic to access service form
-document.addEventListener('DOMContentLoaded', function() {
 const reqServiceButton = document.getElementById('reqServiceButton');
 if (reqServiceButton) {
   reqServiceButton.addEventListener('click', function() {
     window.location.href = 'service-form.html';
   });
 }
-  
-  //Form logic
+//FR2. The web app shall allow users of all abilities to request restoration services.  
   const serviceRequestForm = document.getElementById('serviceRequest');
   if (serviceRequestForm) {
 serviceRequestForm.addEventListener('submit', function(event){
   event.preventDefault();
 
   const formData = new FormData(event.target);
-
+  /* FR2.1 Request form shall allow users to input their name, email, phone number, 
+     description of the restoration needed, and any specific requirements. 
+     FR2.2 The form shall allow users to add images to support their request. */ 
   fetch('/request/submit-request', {
     method: 'POST',
     body: formData
   })
   .then(response => response.json())
+  //FR2.3 Upon submission, the user shall be informed of the successful request reception and case number.
   .then(result => {
     if (result.success){
       document.getElementById('requestID').textContent = result.requestID;
@@ -250,17 +277,17 @@ serviceRequestForm.addEventListener('submit', function(event){
 });
 }
 
-// cancel form button
+// cancel form event handler
 const cancelButton = document.getElementById('cancelButton');
 if (cancelButton){
   cancelButton.addEventListener('click', function(){
   window.location.href = 'service.html';
 });
 }
-//close button 
+//close success message event handler
 const closeButton = document.getElementById('closeButton');
 if (closeButton){
-closeButton.addEventListener('click', function(){
+  closeButton.addEventListener('click', function(){
   document.getElementById('successMessage').hidden = true;
 });
 }
