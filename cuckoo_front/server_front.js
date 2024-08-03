@@ -51,6 +51,11 @@ app.get('/request', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'service-form.html'));
 }); 
 
+app.get('/cuckoo-detail/:id', (req, res) => {
+  console.log('serving cuckoo-detail.html');
+
+  res.sendFile(path.join(__dirname, 'public', 'cuckoo-detail.html'));
+});
 
 app.use((err, req, res, next) => {
   console.error('Error:', err);

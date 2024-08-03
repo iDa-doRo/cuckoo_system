@@ -367,6 +367,18 @@ aside ul {
   border: 2px solid #36454f;
   border-radius: 10px;
   padding: 1rem;
+  position: relative;
+ }
+ .catalog-items .product a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  z-index: 1;
+ }
+
+ .catalog-items .product a:hover {
+  text-decoration: underline;
+  cursor: pointer;
  }
 
  .catalog-items .product img {
@@ -420,6 +432,81 @@ aside ul {
   background-color: #e97451;
   border-color: #daa520;
 }
+
+/* cuckoo detail page */
+.product-detail {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #fffff0;
+  margin: 1rem;
+  gap: 1rem;
+  border: 2px solid #4b2e2e;
+  border-radius: 10px;
+  height: calc(100vh - 8rem);
+  overflow: hidden;
+}
+
+.product-detail img {
+  width: 40%;
+  height: auto;
+  max-height: 100%;
+  border-radius: 10px;
+  border: 2px solid #4b2e2e;
+  margin-right: 2rem;
+}
+
+.product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.product-info h1 {
+  font-size: 2rem;
+  color: #4b2e2e;
+  margin-bottom: 1rem;
+}
+
+.product-info p {
+  font-size: 1.2rem;
+  color: #36454f;
+  margin-bottom: 1rem;
+}
+
+.product-info .product-price {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #4b2e2e;
+}
+
+.product-action {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.product-action button {
+  padding: 1rem 2rem;
+  background-color: #556b2f;
+  color: #fffff0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.product-action button:hover {
+  background-color: #e97451;
+  border-color: #daa520;
+}
+
 
 /* service form page style */
 .service-form-section {

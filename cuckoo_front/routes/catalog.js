@@ -21,7 +21,7 @@ router.use(express.static('public'));
 // Retrieve all products
 router.get('/all', (req, res) => {0
   console.log('Received request for catalog items');
-  const sql = 'SELECT cuckooName, cuckooPrice, cuckooDesc, cuckooPic, cuckooStatus FROM cuckoo';
+  const sql = 'SELECT id, cuckooName, cuckooPrice, cuckooDesc, cuckooPic, cuckooStatus FROM cuckoo';
   console.log('quering all catalog products to database:', sql);
   db.query(sql, (err, results) => {
     if (err) throw err;
@@ -32,17 +32,17 @@ router.get('/all', (req, res) => {0
 // Retrieve a single product by id
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  const sql = 'SELECT cuckooName, cuckooPrice, cuckooDesc, cuckooPic, cuckooStatus FROM cuckoo WHERE id = ?';
+  const sql = 'SELECT id, cuckooName, cuckooPrice, cuckooDesc, cuckooPic, cuckooStatus FROM cuckoo WHERE id = ?';
   
   db.query(sql, id, (err, result) => {
     if (err) throw err;
-    res.json(result);
+    res.json(result[0]);
   });
 });
 //get cuckoo status to use in filtering options
 router.get('/', (req, res) => {
   const {status} = req.query;
-  let query = 'SELECT cuckooName, cuckooPrice, cuckooDesc, cuckooPic, cuckooStatus AS status FROM cuckoo';
+  let query = 'SELECT id, cuckooName, cuckooPrice, cuckooDesc, cuckooPic, cuckooStatus AS status FROM cuckoo';
   if (status) {
     query += ' WHERE cuckooStatus = ?';
   }

@@ -171,12 +171,17 @@ function fetchCatalogItems(status) {
     productElement.className = 'product'; 
     productElement.setAttribute('aria-label', 'Product item');
 
+    const productLink = document.createElement('a');
+    productLink.href = `cuckoo-detail.html?id=${item.id}`;
+    productLink.className = 'product-link';
+    productLink.setAttribute('aria-label', `Details of ${item.cuckooName}`);
+
    if(item.cuckooPic) {
      const productImage = document.createElement('img');
      productImage.src = item.cuckooPic;
      productImage.alt = `${item.cuckooName}, image`;
      productImage.setAttribute('aria-label', `Image of: ${item.cuckooName}`);
-     productElement.appendChild(productImage);
+     productLink.appendChild(productImage);
    }
    //FR1.1 Shall support keyboard navigation and be compatible with screen readers. 
    productElement.setAttribute('role', 'article');
@@ -185,21 +190,22 @@ function fetchCatalogItems(status) {
   const productTile = document.createElement('h3');
    productTile.textContent = item.cuckooName;
    productTile.setAttribute('aria-label', `Item ${item.cuckooName}`);
-   productElement.appendChild(productTile);
+   productLink.appendChild(productTile);
 
    const productDescription = document.createElement('p');
    productDescription.textContent = item.cuckooDesc;
-   productElement.appendChild(productDescription);
+   productLink.appendChild(productDescription);
 
    const productPrice = document.createElement('div');
    productPrice.className = 'price';
    productPrice.textContent = `€${parseFloat(item.cuckooPrice).toFixed(2)}`;
-   productElement.appendChild(productPrice);
+   productLink.appendChild(productPrice);
 
    const productStatus = document.createElement('div');
    productStatus.textContent = item.cuckooStatus;
-    productElement.appendChild(productStatus);
+    productLink.appendChild(productStatus);
 
+    productElement.appendChild(productLink);
    catalogItemsContainer.appendChild(productElement);
     });
   }
@@ -300,4 +306,44 @@ if (menu) {
     mainNav.classList.toggle('show');
   });
 }
+
+// product detail logic
+const reserveBtn = document.getElementById('reserve-btn');
+const moreInfoBtn = document.getElementById('more-btn');
+
+if (reserveBtn) {
+  reserveBtn.addEventListener('click', function() {
+    alert('Product Reserved!');
+  });
+}
+if (moreInfoBtn) {
+  moreInfoBtn.addEventListener('click', function(){
+    alert('More info here');
+  });
+}
+
+const productId = getProductIdFromUrl();
+if (productId) {
+  fetchProductDetails(productId);
+}
+
+function fetchProductDetails(id) {
+  fetch(`http://localhost:3000/catalog/${id}`)
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('product-img').src = data.cuckooPic;
+    document.getElementById('product-name').textContent = data.cuckooName;
+    document.getElementById('product-desc').textContent = data.cuckooDesc;
+    document.getElementById('restoration-status').textContent = data.cuckooStatus;
+    document.getElementById('product-price').textContent = `${data.cuckooPrice}€`;
+  })
+  .catch(error => console.error('Error fetching product details:', error));
+}
+
+function getProductIdFromUrl() {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get('id');
+}
+
+
 });
