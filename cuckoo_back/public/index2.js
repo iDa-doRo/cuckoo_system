@@ -12,10 +12,11 @@ document.addEventListener('DOMContentLoaded', function(){
     const row = document.createElement("tr");
     row.innerHTML = `
     <td>${cuckoo.id}</td>
-    <td>${cuckoo.name}</td>
-    <td>${cuckoo.status}</td>
-    <td>${cuckoo.dateCreated}</td>
-    <td>${cuckoo.lastUpdate}</td>`;
+    <td>${cuckoo.cuckooName}</td>
+    <td>${cuckoo.cuckooStatus}</td>
+    <td>${cuckoo.cuckooPrice}</td>
+    <td>${new Date(cuckoo.created_at).toLocaleDateString()}</td>
+    <td>${new Date(cuckoo.updated_at).toLocaleDateString()}</td>`;
 
     row.addEventListener('click', () => {
       selectedCuckoo.textContent = `${cuckoo.name} selected`;
