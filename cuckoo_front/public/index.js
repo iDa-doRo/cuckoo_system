@@ -212,6 +212,7 @@ function fetchCatalogItems(status) {
   })
   .catch(error => console.error('Error fetching catalog items', error));
 }  
+fetchCatalogItems();
 // filtering logic
 if (statusFilterContainer) {
 fetch('http://localhost:3000/status')

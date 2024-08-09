@@ -1,7 +1,120 @@
 // General site logic
-
 document.addEventListener('DOMContentLoaded', function(){
- //Search nav bar 
+ const cuckooTableBody = document.getElementById("cuckooTableBody");
+ const actionPopup = document.getElementById("actionPopup");
+ const selectedCuckoo = document.getElementById("selectedCuckoo");
+ 
+ function fetchCuckoos() {
+ fetch('/content/getAll')
+ .then(response => response.json())
+ .then(data => {
+  data.forEach(cuckoo => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+    <td>${cuckoo.id}</td>
+    <td>${cuckoo.name}</td>
+    <td>${cuckoo.status}</td>
+    <td>${cuckoo.dateCreated}</td>
+    <td>${cuckoo.lastUpdate}</td>`;
+
+    row.addEventListener('click', () => {
+      selectedCuckoo.textContent = `${cuckoo.name} selected`;
+      actionPopup.style.display = 'block';
+      document.getElementById("editButton").onclick = () => editCuckoo(cuckoo.id);
+      document.getElementById("deleteButton").onclick = () => deleteCuckoo(cuckoo.id);
+    });
+    cuckooTableBody.appendChild(row);
+  });
+ });
+ }
+
+ 
+ function addNewCuckoo() {
+  window.location.href = 'addCuckoo.html';
+ }
+ 
+ function editCuckoo(id) {
+  const updatedCuckoo = {
+    name : prompt("Enter new name:"),
+    status : prompt("Enter new status:"),
+    lastUpdate : new Date().toISOString().split('T')[0]
+  };
+
+  fetch(`/content/update/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type' : 'application/json'
+    },
+    body: JSON.stringify(updatedCuckoo)
+  })
+  .then(response => response.text())
+  .then(data => {
+    alert(data);
+    location.reload();
+  });
+ }
+ 
+ function deleteCuckoo(id) {
+  fetch(`/content/update/${id}`, {
+    method: 'DELETE'
+  })
+  .then(response => response.text())
+  .then(data => {
+    alert(data);
+    location.reload();
+  });
+ }
+ if (cuckooTableBody) {
+  fetchCuckoos();
+  document.getElementById("addNew").addEventListener('click', addNewCuckoo);
+ }
+
+if (window.location.pathname.endsWith('addCuckoo.html')) {
+  const addCuckooForm = document.getElementById("addCuckooForm");
+
+  document.getElementById("cancelPost").addEventListener('click', () => {
+    if (confirm("You are about to discard the post. Are you sure?")) {
+    window.location.href = 'content.html';
+  }
+});
+
+addCuckooForm.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const formData = new FormData(addCuckooForm);
+
+  formData.forEach((value, key) => {
+    console.log(key, value);
+  });
+
+  formData.append('cuckooName', formData.get('cuckooTitle'));
+  formData.append('cuckooDesc', formData.get('description'));
+  formData.append('cuckooStatus', formData.get('status'));
+  formData.append('cuckooPrice', formData.get('price'));
+  formData.append('restorer_id', formData.get('restorer_id'));
+
+fetch('/content/add', {
+  method: 'POST',
+  body: formData
+})
+.then (response => {
+  if (!response.ok) {
+    throw new Error('Network response not ok');
+  }
+  return response.text();
+})
+
+.then(data => {
+  alert('Successfully posted to public site.');
+  window.location.href = 'content.html';
+})
+.catch(error => {
+  console.error('Error fetching cukoo form data:', error);
+});
+});
+}
+
+  //Search nav bar 
   var searchInput = document.querySelector('.search-input');
   var searchButton = document.querySelector('.search-button');
   if (searchInput && searchButton){
@@ -200,8 +313,6 @@ function handleNow(){
     responseShow.classList.add('visible');
   }
   
-
-
 }
 function handleLater(requestID){
   showWarning(`Request ID:${requestID} successfully marked to answer later`);

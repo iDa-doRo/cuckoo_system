@@ -30,6 +30,11 @@ router.get('/', (req,res) => {
       res.status(500).send('server error');
       return;
     }
+    results.forEach((result) => {
+      if (result.cuckooPic) {
+        result.cuckooPic = `data:image/jpeg;base64,${result.cuckooPic.toString('base64')}`;
+      }
+    });
     console.log('Raw query resutls:', results);
     res.json(results);
   });

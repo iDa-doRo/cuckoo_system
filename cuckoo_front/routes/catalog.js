@@ -22,9 +22,14 @@ router.use(express.static('public'));
 router.get('/all', (req, res) => {0
   console.log('Received request for catalog items');
   const sql = 'SELECT id, cuckooName, cuckooPrice, cuckooDesc, cuckooPic, cuckooStatus FROM cuckoo';
-  console.log('quering all catalog products to database:', sql);
+  console.log('quering all catalog products to database:', sql);  
   db.query(sql, (err, results) => {
     if (err) throw err;
+    results.forEach((result) => {
+      if(result.cuckooPic) {
+        result.cuckooPic = `data:image/jpeg;base64,${result.cuckooPic.toString('base64')}`;
+      }
+    });
     res.json(results);
   });
 });
@@ -36,6 +41,9 @@ router.get('/:id', (req, res) => {
   
   db.query(sql, id, (err, result) => {
     if (err) throw err;
+    if (result[0] && result[0].cuckooPic) {
+      result[0].cuckooPic = `data:image/jpeg;base64,${result[0].cuckooPic.toString('base64')}`
+    }
     res.json(result[0]);
   });
 });
@@ -52,6 +60,11 @@ router.get('/', (req, res) => {
       res.status(500).send('Server error');
       return;
     }
+    results.forEach((result) => {
+      if(result.cuckooPic) {
+        result.cuckooPic = `data:image/jpeg;base64,${result.cuckooPic.toString('base64')}`;
+      }
+    });
     res.json(results);
   });
 });

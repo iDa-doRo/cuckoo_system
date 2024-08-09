@@ -29,6 +29,10 @@ app.get('/content', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'content.html'));
 });
 
+app.get('/addCuckoo', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'addCuckoo.html'));
+});
+
 app.get('/requests', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'adminReq.html'));
 });
