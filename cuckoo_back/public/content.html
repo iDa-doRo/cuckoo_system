@@ -47,13 +47,33 @@
                         <tbody id="cuckooTableBody"></tbody>
                     </table>
                 </div>
-                <div class="popup" id="actionPopup">
-                    <p id="selectedCuckoo"></p>
-                    <p>What do you want to do?</p>
-                    <button id="editCuckoo">Edit Cuckoo</button>
-                    <button id="deleteCuckoo">Delete Cuckoo</button>
-                </div>
             </main>
+            <div id="editModal" class="editModal">
+                <div class="edit-modal-content">
+                    <span class="closeEdit" id="closeEdit">&times;</span>
+                    <h2>Edit Cuckoo</h2>
+                    <form id="editForm">
+                        <label for="editName">Name:</label>
+                        <input type="text" id="editName" name="cuckooName">
+                        <label for="editDesc">Description:</label>
+                        <textarea name="cuckooDesc" id="editDesc"></textarea>
+
+                        <label for="editStatus">Status:</label>
+                        <select name="cuckooStatus" id="editStatus">
+                            <option value="Restored">Restored</option>
+                            <option value="In process">In process</option>
+                            <option value="To restore">To Restore</option>
+                        </select>
+                        <label for="cuurentPic">Current Picture:</label>
+                        <label for="editPicture">Picture:</label>
+                        <div class="currentPicContainer">
+                            <img src="" alt=" Current Cuckoo" id="currentPic">
+                        </div>
+                        <input type="file" id="editPicture" name="cuckooPic">
+                        <button type="submit">Save Changes</button>
+                    </form>
+                </div>
+            </div>
             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
             <script src="index2.js"></script>
     </body>

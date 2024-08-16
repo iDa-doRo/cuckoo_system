@@ -48,12 +48,23 @@ connection.query(sql, [product.cuckooName, product.cuckooPrice, product.cuckooDe
 
 
 // Update a product
-router.put('/update/:id', (req, res) => {
+router.put('/update/:id', upload.single('cuckooPic'), (req, res) => {
   const { id } = req.params;
-  const updatedProduct = req.body;
+  const updatedProduct = {
+    cuckooName: req.body.cuckooName,
+    cuckooDesc: req.body.cuckooDesc,
+    cuckooStatus: req.body.cuckooStatus,
+    updated_at: req.body.updated_at,
+  };
+  if (req.file) {
+    updatedProduct.cuckooPic = req.file.buffer;
+  }
   const sql = 'UPDATE cuckoo SET ? WHERE id = ?';
   connection.query(sql, [updatedProduct, id], (err, result) => {
-    if (err) throw err;
+    if (err) {
+      console.error('Error updating product:', err);
+      res.status(500).send('Error updating product');
+    }
     res.send('Product updated...');
   });
 });
@@ -64,7 +75,12 @@ router.delete('/delete/:id', (req, res) => {
   const sql = 'DELETE FROM cuckoo WHERE id = ?';
   connection.query(sql, id, (err, result) => {
     if (err) throw err;
-    res.send('Product deleted...');
+    console.log(result);
+    if (result.affectedRows === 0) {
+      res.status(404).send('Cuckoo not found');
+    } else {
+      res.send('Product deleted...');
+    }
   });
 });
 
