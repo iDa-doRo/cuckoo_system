@@ -435,6 +435,52 @@ margin-top: 20px;
 }
 
 /* content style*/
+.table-cuckoo-container {
+  margin: 20px auto;
+  width: 90%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.table-cuckoo-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table-cuckoo-container th, .table-cuckoo-container td {
+  border: 1p solid #0d1b2a;
+  padding: 10px;
+  text-align: left;
+}
+
+.table-cuckoo-container th {
+  background-color: #0d1b2a;
+  color: #ffffff;
+}
+
+.btn-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+#addNew {
+  padding: 25px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #ffffff;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+#addNew:hover {
+  background-color: #0056b3;
+}
+
+.table-cuckoo-container tbody tr:nth-child(even) {
+  background-color: #ddd;
+}
 
 .editModal {
   display: none;
@@ -451,12 +497,56 @@ margin-top: 20px;
 }
 
 .edit-modal-content {
-  background-color: #fefefe;
+  background-color: #e9f7ef;
   margin: 5% auto;
   padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
+  border-radius: 10px;
+  width: 90%;
   max-width: 500px;
+  box-shadow: 0 4px 8px rgba(0,0, 0, 0.2);
+}
+
+.edit-modal-content label {
+  font-size: 1rem;
+  color: #0D1B2a;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.edit-modal-content input, 
+.edit-modal-content select, 
+.edit-modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.edit-modal-content input[type="file"] {
+  padding: 0;
+}
+
+.edit-modal-content button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.edit-modal-content button:hover {
+  background-color: #0056b3;
+}
+
+.currentPicContainer img {
+  max-width: 30%;
+  height: auto;
+  display: block;
+  margin: auto;
 }
 
 .closeEdit {
@@ -470,4 +560,166 @@ margin-top: 20px;
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.deleteCuckoo {
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}
+
+.deleteCuckoo:hover {
+  background-color: #c82333;
+}
+
+.deleteModal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.delete-modal-content {
+  background-color: #ffffff;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.closeDelete {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.closeDelete:hover, .closeDelete:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.cancel-button {
+  background-color: #6c757d;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover {
+  background-color: #5a6268;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover{
+  background-color: #c82333;
+}
+
+/* content detail style */
+.add-cuckoo-container {
+  width: 90%;
+  max-width: 600px;
+  background-color: #e9f7ef;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0, 0, 0.1);
+}
+
+.add-cuckoo-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1rem;
+  color: #333333;
+}
+
+.add-cuckoo-container input[type="text"],
+.add-cuckoo-container input[type="number"],
+.add-cuckoo-container select, 
+.add-cuckoo-container textarea,
+.add-cuckoo-container input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group select, 
+.form-group input {
+  width: 100%;
+}
+
+.add-cuckoo-container .button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-cuckoo-container button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.add-cuckoo-container button:hover {
+  background-color: #0056b3;
+}
+
+.add-cuckoo-container button[type="reset"] {
+  background-color: #dc3545;
+}
+
+.add-cuckoo-container button[type="reset"]:hover {
+  background-color: #c82333;
 }

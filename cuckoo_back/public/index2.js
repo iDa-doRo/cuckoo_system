@@ -5,16 +5,21 @@ document.addEventListener('DOMContentLoaded', function(){
  const closeModal = document.getElementById("closeEdit");
  const editForm = document.getElementById("editForm");
  const currentPic = document.getElementById("currentPic");
-
+ const deleteModal = document.getElementById("deleteModal");
+ const closeDelete = document.getElementById("closeDelete");
+ const confirmDelete = document.getElementById("confirmDelete");
+ const cancelDelete = document.getElementById("cancelDelete");
  
-let currentCuckoo = null;
+ let cuckooIdToDelete = null;
+ let currentCuckoo = null;
 
  function fetchCuckoos() {
+  cuckooTableBody.innerHTML = '';
  fetch('/content/getAll')
  .then(response => response.json())
  .then(data => {
   data.forEach(cuckoo => {
-    console.log(cuckoo);
+    console.log('cuckoo:', cuckoo);
     const createDate = new Date(cuckoo.created_at);
     const updateDate = new Date(cuckoo.updated_at);
 
@@ -31,30 +36,61 @@ let currentCuckoo = null;
     <td><button class="deleteCuckoo" data-id="${cuckoo.id}">Delete</button></td>`;
 
     row.addEventListener('click', () => {
+      console.log('Row clicked:', cuckoo);
       currentCuckoo = cuckoo.id;
       document.getElementById("editName").value = cuckoo.cuckooName;
       document.getElementById("editDesc").value = cuckoo.cuckooDesc;
       document.getElementById("editStatus").value = cuckoo.cuckooStatus;
 
-      if (cuckoo.cukooPic) {
-        currentPic.src = cuckoo.cuckooPic;
+      if (cuckoo.cuckooPic && cuckoo.cuckooPic.type === 'Buffer') {
+        const blob = new Blob([new Uint8Array(cuckoo.cuckooPic.data)], { type: 'image/jpeg'});
+        const imageUrl = URL.createObjectURL(blob);
+        currentPic.src = imageUrl;
         currentPic.style.display = 'block';
       } else {
         currentPic.style.display = 'none';
       }
-      editModal.style.display = 'block';
-    });
+       editModal.style.display = 'block';
+  });
     cuckooTableBody.appendChild(row);
   });
+
   document.querySelectorAll('.deleteCuckoo').forEach(button => {
     button.addEventListener('click', function(event) {
       event.stopPropagation();
       const id = this.getAttribute('data-id');
-      deleteCuckoo(id);
+      cuckooIdToDelete = id;
+      deleteModal.style.display = 'block';
     });
   });
  });
+}
+if (cuckooTableBody) {
+fetchCuckoos();
  }
+
+ function deleteCuckoo(id) {
+  fetch(`/content/delete/${id}`, {
+    method: 'DELETE',
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response not ok');
+    }
+    return response.text();
+  })
+    .then(data => {
+      alert('Cuckoo deleted successfully');
+      deleteModal.style.display = 'none';
+      location.reload();
+    })
+    .catch(error => {
+      console.error('Error deleting cuckoo:', error);
+      alert('There was an error while trying to delete cuckoo');
+      deleteModal.style.display = 'none';
+    });
+ }
+
  if (closeModal){
   closeModal.addEventListener('click', function() {
     editModal.style.display = "none";
@@ -65,7 +101,11 @@ let currentCuckoo = null;
   if (event.target == editModal) {
     editModal.style.display = "none";
   }
+  if (event.target == deleteModal) {
+    deleteModal.style.display = "none";
+  }
  }
+
  if (editForm) {
   editForm.addEventListener('submit', function(event){
     event.preventDefault();
@@ -87,32 +127,28 @@ let currentCuckoo = null;
   });
  }
 
+ if (confirmDelete) {
+  confirmDelete.addEventListener('click', function() {
+    if (cuckooIdToDelete) {
+      deleteCuckoo(cuckooIdToDelete);
+    }
+  });
+}
+ if (cancelDelete) {
+  cancelDelete.addEventListener('click', function() {
+    deleteModal.style.display = 'none';
+  });
+ }
+ if (closeDelete) {
+  closeDelete.addEventListener('click', function() {
+    deleteModal.style.display = 'none';
+  });
+ }
+
  function addNewCuckoo() {
   window.location.href = 'addCuckoo.html';
  }
- 
- function deleteCuckoo(id) {
-  const confirmDelete = confirm("Are you sure you want to delete this cuckoo?");
-  if (confirmDelete) {
-    console.log(`Sending DELETE for cuckoo id: ${id}`);
-     fetch(`/content/delete/${id}`, {
-    method: 'DELETE'
-  }) 
-  .then(response => {
-    if(!response.ok){
-      throw new Error('Network response was not ok');
-    }
-    return response.text();
-  })
-  .then(data => {
-    alert('Cuckoo deleted successfully');
-    location.reload();
-  })
-  .catch(error => console.error('Error deleting cuckoo:', error));
-}
- }
  if (cuckooTableBody) {
-  fetchCuckoos();
   document.getElementById("addNew").addEventListener('click', addNewCuckoo);
  }
 

@@ -28,9 +28,14 @@
                 </div>
             </header>
             <main>
-                <h1>Cuckoo's Management</h1>
+                <nav aria-label="breadcrumb">
+                    <ol>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li>Cuckoo Clocks</li>
+                    </ol>
+                </nav>
                 <div class="btn-container">
-                    <button id="addNew">Add Cuckoo</button>
+                    <button class="addNew" id="addNew">Add Cuckoo</button>
                 </div>
                 <div class="table-cuckoo-container">
                     <table>
@@ -64,14 +69,26 @@
                             <option value="In process">In process</option>
                             <option value="To restore">To Restore</option>
                         </select>
-                        <label for="cuurentPic">Current Picture:</label>
-                        <label for="editPicture">Picture:</label>
+                        <label for="currentPic">Current Picture:</label>
                         <div class="currentPicContainer">
-                            <img src="" alt=" Current Cuckoo" id="currentPic">
+                            <img src="" alt="Current Cuckoo" id="currentPic">
                         </div>
+
+                        <label for="editPicture">Picture:</label>
                         <input type="file" id="editPicture" name="cuckooPic">
                         <button type="submit">Save Changes</button>
                     </form>
+                </div>
+            </div>
+            <div id="deleteModal" class="deleteModal">
+                <div class="delete-modal-content">
+                    <span class="closeDelete" id="closeDelete">&times;</span>
+                    <h2>Confirm:</h2>
+                    <p>Are you sure you want to delete the cuckoo?</p>
+                    <div class="modal-buttons">
+                        <button id="confirmDelete" class="delete-button">Yes</button>
+                        <button id="cancelDelete" class="cancel-button">Cancel</button>
+                    </div>
                 </div>
             </div>
             <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

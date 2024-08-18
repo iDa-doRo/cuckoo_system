@@ -28,26 +28,46 @@
                 </div>
             </header>
             <main>
-                <h1>Add New Cuckoo</h1>
-                <form id="addCuckooForm">
-                    <label for="cuckooTitle">Cuckoo Title:</label>
-                    <input type="text" name="cuckooTitle" id="cuckooTitle" required>
-                    <label for="description">Description:</label>
-                    <textarea name="description" id="description" required></textarea>
-                    <label for="price">Price:</label>
-                    <input type="number" name="price" id="price" required>
-                    <label for="status">Restoration Status:</label>
-                    <select name="status" id="status">
-                        <option value="Restored">Restored</option>
-                        <option value="In process">In process</option>
-                        <option value="To restore">To restore</option>
-                    </select>
-                    <label for="restorer">Restorer ID:</label>
-                    <input type="number" name="restorer_id" id="restorer_id" required>
-                    <label for="image">Image:</label>
-                    <input type="file" name="cuckooPic" id="image" accept="image/*" required>
-                    <button type="button" id="cancelPost">Cancel Post</button>
-                    <button type="submit">Post Cuckoo</button>
+                <nav aria-label="breadcrumb">
+                    <ol>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="content.html"> Cuckoo Clocks</a></li>
+                        <li>Add New Cuckoo</li>
+                    </ol>
+                </nav>
+                <div class="add-cuckoo-container">
+                    <h1>Add New Cuckoo</h1>
+                    <form id="addCuckooForm">
+                        <label for="cuckooTitle">Cuckoo Title:</label>
+                        <input type="text" name="cuckooTitle" id="cuckooTitle" required>
+                        <label for="description">Description:</label>
+                        <textarea name="description" id="description" required></textarea>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="price">Price:</label>
+                                <input type="number" name="price" id="price" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="status">Restoration Status:</label>
+                                <select name="status" id="status">
+                                    <option value="Restored">Restored</option>
+                                    <option value="In process">In process</option>
+                                    <option value="To restore">To restore</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="restorer">Restorer ID:</label>
+                                <input type="number" name="restorer_id" id="restorer_id" required>
+                            </div>
+                        </div>
+                        <label for="image">Image:</label>
+                        <input type="file" name="cuckooPic" id="image" accept="image/*" required>
+                        <div class="button-container">
+                            <button type="button" id="cancelPost">Cancel Post</button>
+                            <button type="submit">Post Cuckoo</button>
+                        </div>
+                </div>
                 </form>
             </main>
 
