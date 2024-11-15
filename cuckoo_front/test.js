@@ -7,13 +7,13 @@ const db = mysql.createConnection({
   database: 'cuckoo_db',
   port: 3306
 });
-
+// testing the filtering option when restored items are the only ones to show
 db.connect(err => {
   if (err) {
     throw err;
   }
   console.log('MySQL connected...');
-
+  // select only items marked as restored
   const sql = "SELECT cuckooName, cuckooPrice, cuckooDesc, cuckooPic, cuckooStatus FROM cuckoo WHERE cuckooStatus = 'Restored'";
   console.log('Executing SQL query:', sql);
 
