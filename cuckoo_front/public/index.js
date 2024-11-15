@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
   
- /*  //Form logic //
+ //Form logic //
   document.getElementById('dataForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent default form submission
   
@@ -85,4 +85,4 @@ fetch('http://localhost:3000/submitted-data') // New endpoint to retrieve posted
 })
 .catch(error => {
   console.error('There was a problem with your fetch operation:', error);
-}); */
+});
