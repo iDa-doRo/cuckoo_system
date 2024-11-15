@@ -9,7 +9,7 @@ const pool = mysql.createPool ({
   database: 'cuckoo_db',
   port: 3306
 });
-
+// function to convert plain text password into hashed password
 async function updatePasswords() {
     pool.getConnection((err, connection) =>{
         if (err) {
@@ -23,11 +23,12 @@ async function updatePasswords() {
                 connection.release();
                 return;
             }
+          // the alghoritm used for conversion is bcrypt 
             for (const user of results) {
                 if (!user.restorerPasswordHash.startsWith('$2a$')) {
                     const hashedPass = await bcrypt.hash(user.restorerPasswordHash, 10);
                     const updateQuery = 'UPDATE restorer SET restorerPasswordHash = ? WHERE id = ?';
-
+                    // associates hashed password to user 
                     connection.query(updateQuery, [hashedPass, user.id], (err) => {
                         if (err) {
                             console.error(`error updating ${user.restorerName} password`, err);
